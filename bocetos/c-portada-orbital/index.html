@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orbital · Portada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="orbital-hero.css">
+</head>
+<body>
+
+<section class="oh-hero" id="inicio" data-orbital-hero aria-labelledby="oh-title">
+  <div class="oh-bg" aria-hidden="true">
+    <div class="oh-nebula">
+      <div class="oh-cloud oh-cloud--mid"></div>
+      <div class="oh-cloud oh-cloud--violet"></div>
+      <div class="oh-cloud oh-cloud--blue"></div>
+    </div>
+    <canvas class="oh-canvas"></canvas>
+    <div class="oh-grain"></div>
+    <div class="oh-vignette"></div>
+  </div>
+
+  <div class="oh-content">
+    <header class="oh-top">
+      <a class="oh-brand" href="#inicio">
+        <img src="logo-wg.png" alt="" width="34" height="34">
+        <span>WoodGames Studio</span>
+      </a>
+      <nav class="oh-nav" aria-label="Principal">
+        <a href="#juego">Juego</a>
+        <a href="#juego">Estudio</a>
+        <a href="#juego">Devlog</a>
+        <a href="#juego">Contacto</a>
+      </nav>
+    </header>
+
+    <div class="oh-main">
+      <p class="oh-kicker">WoodGames Studio presenta · nuestro primer juego</p>
+      <h1 class="oh-title" id="oh-title" aria-label="Orbital"><span style="--i:0" aria-hidden="true">O</span><span style="--i:1" aria-hidden="true">R</span><span style="--i:2" aria-hidden="true">B</span><span style="--i:3" aria-hidden="true">I</span><span style="--i:4" aria-hidden="true">T</span><span style="--i:5" aria-hidden="true">A</span><span style="--i:6" aria-hidden="true">L</span></h1>
+      <p class="oh-tagline">Domina la gravedad. Salta de planeta en planeta con un solo dedo.</p>
+      <div class="oh-ctas">
+        <a class="oh-btn oh-btn--primary" href="#juego">
+          Descubre el juego
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="oh-btn oh-btn--ghost" href="#juego">Avísame del lanzamiento</a>
+      </div>
+    </div>
+
+    <div class="oh-bottom">
+      <dl>
+        <div><dt>Plataformas</dt><dd>iOS · Android</dd></div>
+        <div><dt>Estado</dt><dd>En producción</dd></div>
+      </dl>
+      <a class="oh-scroll" href="#juego"><i></i>Desliza</a>
+    </div>
+  </div>
+</section>
+
+<section class="oh-next" id="juego" aria-labelledby="oh-next-title">
+  <div class="oh-next__inner">
+    <h2 id="oh-next-title">Orbital es el primer juego de WoodGames Studio. <em>Un dedo, toda la gravedad.</em></h2>
+    <ol class="oh-steps">
+      <li><b>Atraer</b><strong>Mantén pulsado</strong><span>El planeta más cercano tira de La Bola.</span></li>
+      <li><b>Orbitar</b><strong>Elige órbita</strong><span>Exterior: 10 puntos y 1 moneda. Interior: 25 puntos y 3 monedas.</span></li>
+      <li><b>Cargar</b><strong>Mantén en órbita</strong><span>Cuanto más cargas, más fuerte sale.</span></li>
+      <li><b>Soltar</b><strong>En el momento justo</strong><span>Escapa de la órbita hacia el siguiente planeta.</span></li>
+    </ol>
+    <footer class="oh-foot">
+      <span><img src="logo-wg.png" alt="" width="24" height="24">© 2026 WoodGames Studio</span>
+      <span>Boceto C · portada de Orbital</span>
+    </footer>
+  </div>
+</section>
+
+<script src="orbital-hero.js" defer></script>
+</body>
+</html>

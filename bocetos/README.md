@@ -9,6 +9,7 @@ Lienzo privado con todos los bocetos: https://claude.ai/artifact/PYTGWDTfNDVD8T6
 |---|---|---|---|
 | A · Amigable | Cartoon, madera cálida, sombras duras. Luckiest Guy + Nunito | `Main.dc.html`, `Orbital.dc.html`, `DemoOrbital.dc.html` | Boceto v0.1 |
 | B · Minimalista | Editorial, idea «Anillos» (anillos del tronco = órbitas). Instrument Serif + Inter + JetBrains Mono. Inspirado en pixelarte.es y marcocreativo.es | `MainMinimal.dc.html` (usa `DemoOrbital.dc.html` en modo sobrio) | Boceto v0.1 |
+| C · Portada Orbital | Portada a pantalla completa con el fondo del juego en parallax (3 profundidades de estrellas y nebulosas), planetas con órbitas, La Bola saltando entre planetas, lente de gravedad que sigue al cursor y parallax al hacer scroll. Unbounded + Inter + JetBrains Mono. Vista previa: https://claude.ai/artifact/T6J6odi6NMv6V941bdTiVw | `c-portada-orbital/` (HTML, CSS y JS listos para la web) | Boceto v0.1 |
 
 `assets/`: logo recortado con fondo transparente (a partir del logo WG del cliente).
 

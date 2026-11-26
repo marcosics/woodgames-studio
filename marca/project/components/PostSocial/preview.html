@@ -1,0 +1,38 @@
+<!-- @dsCard group="Redes" height=340 subtitle="Anuncio, Devlog y Personaje sobre la misma cuadrícula" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+  body { margin: 0; background: var(--abedul); }
+  .fila { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px; }
+  .post { width: 260px; aspect-ratio: 1; position: relative; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+  .etq { font: 600 10px/1 var(--font-mono); letter-spacing: .12em; }
+  .tit { font: 800 26px/1 var(--font-display); letter-spacing: -.01em; max-width: 170px; text-wrap: balance; }
+  .marca { position: absolute; right: 18px; bottom: 18px; width: 22px; height: 22px; }
+  .anuncio { background: var(--bosque); color: var(--on-bosque); }
+  .devlog { background: var(--abedul-alto); color: var(--carbon); outline: 1px solid var(--linea); }
+  .personaje { background: var(--roble); color: var(--on-roble); }
+  .fecha { font: 600 10px/1 var(--font-mono); letter-spacing: .12em; background: var(--resina); color: var(--on-resina); padding: 4px 6px; align-self: flex-start; }
+  .captura { --c: var(--corte-md); height: 104px; display: grid; place-items: center; font: 600 10px/1 var(--font-mono); letter-spacing: .12em; color: var(--ceniza);
+    background: repeating-radial-gradient(circle at 30% 70%, transparent 0 10px, var(--linea) 10px 12px), var(--abedul);
+    clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c)); }
+  .silueta { position: absolute; right: -10px; top: 30px; font: 800 200px/1 var(--font-display); color: var(--on-roble); opacity: .9; }
+</style>
+<div class="fila">
+  <div class="post anuncio">
+    <span class="etq">EVENTO</span>
+    <span class="fecha">FECHA POR ANUNCIAR</span>
+    <span class="tit">Primera demo pública</span>
+    <img class="marca" src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" alt="">
+  </div>
+  <div class="post devlog">
+    <span class="etq">DEVLOG #01</span>
+    <div class="captura">CAPTURA DEL JUEGO</div>
+    <span class="tit">Así empieza el taller</span>
+    <img class="marca" src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" alt="">
+  </div>
+  <div class="post personaje">
+    <span class="etq">PERSONAJE 01</span>
+    <span class="silueta" aria-hidden="true">?</span>
+    <span class="tit">¿Quién se esconde aquí?</span>
+    <img class="marca" src="/_blob/6cf56a204a8936acac67d5e192f5d167" alt="">
+  </div>
+</div>

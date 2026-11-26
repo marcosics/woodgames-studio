@@ -1,0 +1,20 @@
+<!-- @dsCard group="Interfaz" height=160 subtitle="Web y menús del juego" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@700&display=swap">
+<style>
+  body { margin: 0; background: var(--abedul); font-family: var(--font-body); }
+  .fila { display: flex; flex-wrap: wrap; gap: 24px; padding: 32px 24px; align-items: center; }
+  .bloque { display: inline-block; filter: drop-shadow(4px 4px 0 #1c1813); transition: transform .16s ease-out, filter .16s ease-out; }
+  .bloque:hover { transform: translate(-2px, -2px); filter: drop-shadow(8px 8px 0 #1c1813); }
+  .btn { --c: var(--corte-sm); display: inline-block; border: 0; cursor: pointer; font: 700 16px/1 var(--font-body); padding: 16px 24px;
+    clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c)); }
+  .principal { background: var(--roble); color: var(--on-roble); }
+  .secundario { background: var(--laca); color: var(--on-laca); }
+  .texto { background: none; color: var(--laca); padding: 16px 8px; text-decoration: underline; text-underline-offset: 4px; }
+  .btn:focus-visible { outline: 3px solid var(--laca); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .bloque { transition: none; } .bloque:hover { transform: none; } }
+</style>
+<div class="fila">
+  <span class="bloque"><button class="btn principal" id="b1">Juega la demo</button></span>
+  <span class="bloque"><button class="btn secundario" id="b2">Lee el devlog</button></span>
+  <button class="btn texto" id="b3">Conoce al equipo</button>
+</div>

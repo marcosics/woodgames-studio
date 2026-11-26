@@ -1,0 +1,37 @@
+<!-- @dsCard height=288 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@500&display=swap">
+<style>
+  body { margin: 0; background: var(--abedul); }
+  .portada { position: relative; width: 960px; height: 288px; background: var(--abedul); overflow: hidden; }
+  svg { position: absolute; inset: 0; }
+  .roble { fill: var(--roble); } .bosque { fill: var(--bosque); } .laca { fill: var(--laca); } .resina { fill: var(--resina); }
+  .anillo { fill: none; stroke: var(--on-roble); stroke-width: var(--space-2); }
+  .nucleo { fill: var(--on-roble); }
+  .texto { position: absolute; left: 40px; bottom: 32px; max-width: 440px; display: grid; gap: 8px; }
+  .nombre { font: 800 80px/.95 var(--font-display); letter-spacing: -.02em; color: var(--carbon); }
+  .lema { font: 500 14px/1.4 var(--font-body); color: var(--ceniza); }
+</style>
+<div class="portada">
+  <svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+    <!-- blocks: roble 272x288 (slab), bosque 128x176, laca 128x112, resina 64x64 (space-6) -->
+    <!-- arrangement: one tall roble slab bleeding top and bottom, bosque/laca stacked as planks on the right edge, resina offcut at its foot -->
+    <!-- pattern: growth rings (literal motif, row "lens, wave, leaf"): the brand is a cut log, so the rings of the logo cross the slab -->
+    <!-- scales: ring pitch space-5 (40px), stroke space-2 (8px), core space-3 (16px), square corners (radius-sm ~ 0) -->
+    <defs><clipPath id="slab"><rect x="560" y="0" width="272" height="288"/></clipPath></defs>
+    <rect class="roble" x="560" y="0" width="272" height="288"/>
+    <rect class="bosque" x="832" y="0" width="128" height="176"/>
+    <rect class="laca" x="832" y="176" width="128" height="112"/>
+    <rect class="resina" x="496" y="208" width="64" height="64"/>
+    <g clip-path="url(#slab)">
+      <circle class="anillo" cx="668" cy="180" r="24"/>
+      <circle class="anillo" cx="668" cy="180" r="64"/>
+      <circle class="anillo" cx="668" cy="180" r="104"/>
+      <circle class="anillo" cx="668" cy="180" r="144"/>
+      <rect class="nucleo" x="660" y="172" width="16" height="16"/>
+    </g>
+  </svg>
+  <div class="texto">
+    <div class="nombre">WoodGames<br>Studio</div>
+    <div class="lema">Juegos hechos a mano, con la veta a la vista.</div>
+  </div>
+</div>

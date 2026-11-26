@@ -1,0 +1,44 @@
+<!-- @dsCard group="Marca" height=360 subtitle="Horizontal, apilado, tamaños y perfil" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+  body { margin: 0; background: var(--abedul); color: var(--carbon); font-family: var(--font-display); }
+  .fila { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; padding: 24px; }
+  .h { display: flex; align-items: center; gap: 12px; }
+  .h img { width: 56px; height: 56px; }
+  .nombre { font-weight: 800; font-size: 40px; line-height: .9; letter-spacing: -.02em; }
+  .studio { font-family: var(--font-mono); font-weight: 600; font-size: 12px; letter-spacing: .32em; color: var(--ceniza); display: block; margin-top: 6px; }
+  .banda { background: var(--bosque); color: var(--on-bosque); }
+  .banda .studio { color: var(--on-bosque); }
+  .apilado { display: grid; justify-items: center; gap: 8px; text-align: center; }
+  .apilado img { width: 72px; }
+  .apilado .nombre { font-size: 28px; }
+  .tamanos { display: flex; align-items: flex-end; gap: 16px; }
+  .perfil { width: 96px; height: 96px; border-radius: var(--radius-pill); background: var(--abedul-alto); display: grid; place-items: center; outline: 1px solid var(--linea); }
+  .perfil img { width: 60%; }
+  .pie { font-family: var(--font-mono); font-size: 11px; color: var(--ceniza); letter-spacing: .08em; }
+</style>
+<div>
+  <div class="fila">
+    <div class="h">
+      <img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" alt="WoodGames Studio">
+      <div><span class="nombre">WoodGames</span><span class="studio">STUDIO</span></div>
+    </div>
+    <div class="tamanos">
+      <img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" width="48" height="48" alt="">
+      <img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" width="32" height="32" alt="">
+      <img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" width="16" height="16" alt="">
+      <span class="pie">48 · 32 · 16 PX</span>
+    </div>
+    <div class="perfil"><img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" alt="Foto de perfil"></div>
+  </div>
+  <div class="fila banda">
+    <div class="apilado">
+      <img src="/_blob/8ef014cda663332df0753827b6c052b5" alt="WoodGames Studio, una tinta">
+      <div><span class="nombre">WoodGames</span><span class="studio">STUDIO</span></div>
+    </div>
+    <div class="h">
+      <img src="/_blob/85f7af612d88f1b91ffeeff46ed3d6c5" alt="">
+      <div><span class="nombre">WoodGames</span><span class="studio">STUDIO</span></div>
+    </div>
+  </div>
+</div>

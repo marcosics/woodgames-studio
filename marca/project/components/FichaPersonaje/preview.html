@@ -1,0 +1,48 @@
+<!-- @dsCard group="Web" height=420 subtitle="Oculto (antes del anuncio) y desvelado" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Figtree:wght@400;500&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+  body { margin: 0; background: var(--abedul); color: var(--carbon); font-family: var(--font-body); }
+  .fila { display: flex; flex-wrap: wrap; gap: 32px; padding: 24px; }
+  .bloque { filter: drop-shadow(4px 4px 0 #1c1813); }
+  .ficha { --c: var(--corte-md); width: 240px; background: var(--abedul-alto);
+    clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c)); }
+  .arte { height: 168px; position: relative; display: grid; place-items: center; overflow: hidden;
+    background: repeating-radial-gradient(circle at 70% 80%, transparent 0 14px, rgba(0,0,0,.12) 14px 17px), var(--bosque); color: var(--on-bosque); }
+  .arte.roble { background: repeating-radial-gradient(circle at 30% 80%, transparent 0 14px, rgba(0,0,0,.12) 14px 17px), var(--roble); color: var(--on-roble); }
+  .interrogante { font: 800 120px/1 var(--font-display); }
+  .tag { position: absolute; top: 12px; left: 12px; font: 600 10px/1 var(--font-mono); letter-spacing: .12em; background: var(--resina); color: var(--on-resina); padding: 4px 6px; }
+  .cuerpo { padding: 16px 16px 20px; display: grid; gap: 8px; }
+  .nombre { font: 700 22px/1.2 var(--font-display); margin: 0; }
+  .rol { font: 600 11px/1 var(--font-mono); letter-spacing: .12em; color: var(--ceniza); }
+  .stats { display: grid; gap: 6px; margin-top: 4px; }
+  .stat { display: grid; grid-template-columns: 80px 1fr; align-items: center; gap: 8px; font: 600 10px/1 var(--font-mono); letter-spacing: .1em; color: var(--ceniza); }
+  .barra { display: flex; gap: 3px; }
+  .barra i { flex: 1; height: 8px; background: var(--linea); }
+  .barra i.on { background: var(--laca); }
+</style>
+<div class="fila">
+  <div class="bloque"><div class="ficha">
+    <div class="arte"><span class="tag">PRÓXIMAMENTE</span><span class="interrogante" aria-hidden="true">?</span></div>
+    <div class="cuerpo">
+      <p class="nombre">Personaje 01</p>
+      <span class="rol">ROL: ???</span>
+      <div class="stats">
+        <div class="stat">FUERZA <span class="barra"><i></i><i></i><i></i><i></i><i></i></span></div>
+        <div class="stat">AGILIDAD <span class="barra"><i></i><i></i><i></i><i></i><i></i></span></div>
+        <div class="stat">INGENIO <span class="barra"><i></i><i></i><i></i><i></i><i></i></span></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="bloque"><div class="ficha">
+    <div class="arte roble"><span class="tag">EJEMPLO</span><span class="interrogante" aria-hidden="true">A</span></div>
+    <div class="cuerpo">
+      <p class="nombre">Nombre del personaje</p>
+      <span class="rol">ROL EN EL JUEGO</span>
+      <div class="stats">
+        <div class="stat">FUERZA <span class="barra"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <div class="stat">AGILIDAD <span class="barra"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        <div class="stat">INGENIO <span class="barra"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+      </div>
+    </div>
+  </div></div>
+</div>

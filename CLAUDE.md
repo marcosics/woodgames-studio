@@ -11,9 +11,10 @@ WoodGames Studio es una desarrolladora de videojuegos nueva. Este repositorio re
 ## Estado del proyecto
 
 - **Fase actual:** decidir la base de la marca (nombre, logo, color, tipografía, elementos gráficos, aplicaciones, web, registro de marca). Aún no hay nada decidido.
-- **Dos webs separadas:** una con el método del cliente y otra con el método propio del usuario. Comparten una base igual o parecida (marca y contenido) y se publican por separado para compararlas. Estructura prevista, aún sin crear:
+- **Dos webs separadas:** una con el método del cliente y otra con el método propio del usuario. Comparten una base igual o parecida (marca y contenido) y se publican por separado para compararlas. Estructura (carpetas creadas, vacías):
   - `base/`: lo común a las dos webs
   - `web-cliente/`: método del cliente
   - `web-propuesta/`: método del usuario
 - **`marca/`:** borrador de sistema de diseño que se hizo sin que se pidiera. Está apartado: no se usa como referencia salvo que el usuario lo diga. También está publicado como artefacto privado en https://claude.ai/artifact/NTbaXb51qJ4AeuJzy7W5vZ.
+- **`docs/lista-marca.md`:** lista de decisiones de marca, con casillas para marcar lo decidido.
 - **Referencias de webs que dio el usuario:** https://pixelarte.es/ y https://www.iukanet.com/

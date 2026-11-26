@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Inicio minimalista · WoodGames Studio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#f2ede4}
+a{color:#120d0a}a:hover{color:#120d0a}
+.m-link{text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .3s ease}
+.m-link:hover{background-size:100% 1px}
+.m-row{transition:background-color .25s ease, color .25s ease, padding .25s ease}
+.m-row:hover{background:#120d0a;color:#f2ede4;padding-left:24px}
+.m-row:hover .m-arrow{transform:translateX(8px) rotate(-45deg)}
+.m-arrow{transition:transform .25s ease}
+@keyframes m-rot{to{transform:rotate(360deg)}}
+@keyframes m-rotr{to{transform:rotate(-360deg)}}
+.m-r1{animation:m-rot 60s linear infinite;transform-origin:500px 500px}
+.m-r2{animation:m-rotr 90s linear infinite;transform-origin:500px 500px}
+.m-r3{animation:m-rot 40s linear infinite;transform-origin:500px 500px}
+.m-orbit{animation:m-rot 9s linear infinite;transform-origin:500px 500px}
+@keyframes m-marq{to{transform:translateX(-50%)}}
+.m-marquee{animation:m-marq 28s linear infinite}
+@media (prefers-reduced-motion: reduce){.m-r1,.m-r2,.m-r3,.m-orbit,.m-marquee{animation:none}.m-row,.m-arrow,.m-link{transition:none}}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #f2ede4; color: #120d0a; font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
+
+<header style="position: relative; z-index: 2; background: #120d0a; color: #f2ede4">
+<div style="max-width: 1360px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase">
+<a href="#m-top" style="display: flex; align-items: center; gap: 12px; color: #f2ede4; text-decoration: none">
+<img src="/_blob/470aea27ee8d57ce5e89facca9245935" alt="" style="width: 36px; height: 36px; filter: grayscale(1) contrast(1.1)">
+<span>WoodGames Studio</span>
+</a>
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 8px 32px">
+<a class="m-link" href="#m-juegos" style="color: #f2ede4">(01) Juegos</a>
+<a class="m-link" href="#m-estudio" style="color: #f2ede4">(02) Estudio</a>
+<a class="m-link" href="#m-proceso" style="color: #f2ede4">(03) Proceso</a>
+<a class="m-link" href="#m-contacto" style="color: #f2ede4">(04) Contacto</a>
+</nav>
+<span style="color: #e9a23b">ES / EN</span>
+</div>
+</header>
+
+<section id="m-top" onPointerMove="{{move}}" style="position: relative; overflow: hidden; background: #120d0a; color: #f2ede4; min-height: 760px; display: flex; align-items: flex-end">
+<svg viewBox="0 0 1000 1000" aria-hidden="true" style="position: absolute; width: 1100px; height: 1100px; right: -220px; top: 50%; margin-top: -550px; transform: translate({{px}}px, {{py}}px); transition: transform .4s ease-out">
+<g class="m-r1"><circle cx="500" cy="500" r="470" fill="none" stroke="#3a2a20" stroke-width="2" stroke-dasharray="60 14 4 14"></circle></g>
+<g class="m-r2"><circle cx="500" cy="500" r="410" fill="none" stroke="#4a3526" stroke-width="1.5" stroke-dasharray="2 10"></circle></g>
+<g class="m-r3"><circle cx="500" cy="500" r="350" fill="none" stroke="#5a4130" stroke-width="3" stroke-dasharray="120 20 30 20"></circle></g>
+<g class="m-r2"><circle cx="500" cy="500" r="290" fill="none" stroke="#6b4e38" stroke-width="1.5" stroke-dasharray="8 8"></circle></g>
+<g class="m-r1"><circle cx="500" cy="500" r="230" fill="none" stroke="#7d5c42" stroke-width="2" stroke-dasharray="40 10"></circle></g>
+<g class="m-r3"><circle cx="500" cy="500" r="170" fill="none" stroke="#8f6a4c" stroke-width="1.5"></circle></g>
+<circle cx="500" cy="500" r="110" fill="#1d1511" stroke="#a37a57" stroke-width="2"></circle>
+<g class="m-orbit"><circle cx="500" cy="270" r="10" fill="#e9a23b"></circle></g>
+</svg>
+<div style="position: relative; width: 100%; max-width: 1360px; margin: 0 auto; padding: 120px 32px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+<p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #e9a23b">◇ Estudio independiente de videojuegos</p>
+<h1 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(64px, 10vw, 168px); line-height: 0.92; letter-spacing: -2px; max-width: 11ch">Juegos con veta.<br><em style="color: #e9a23b">Tallados despacio.</em></h1>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid #3a2a20; padding-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #bfb3a3">
+<span>[CIUDAD], España</span>
+<span>Primer juego: Orbital — en producción</span>
+<a href="#m-juegos" class="m-link" style="color: #f2ede4">Bajar ↓</a>
+</div>
+</div>
+</section>
+
+<div aria-hidden="true" style="overflow: hidden; background: #e9a23b; color: #120d0a; border-top: 1px solid #120d0a; border-bottom: 1px solid #120d0a">
+<div class="m-marquee" style="display: flex; width: max-content; gap: 48px; padding: 14px 0; font-family: 'Instrument Serif', serif; font-size: 34px; white-space: nowrap">
+<span>Orbital</span><span>✦</span><span><em>en producción</em></span><span>✦</span><span>iOS · Android</span><span>✦</span><span>Arcade 2D de gravedad</span><span>✦</span>
+<span>Orbital</span><span>✦</span><span><em>en producción</em></span><span>✦</span><span>iOS · Android</span><span>✦</span><span>Arcade 2D de gravedad</span><span>✦</span>
+</div>
+</div>
+
+<section id="m-juegos" style="background: #f2ede4">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 32px; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px">
+<h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(48px, 7vw, 112px); line-height: 1; letter-spacing: -1px">Juegos</h2>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase">(01) — 2 títulos</span>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #120d0a">
+<li style="border-bottom: 1px solid #120d0a">
+<a class="m-row" href="#m-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px 24px; align-items: center; padding: 32px 0; text-decoration: none; color: inherit">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">01</span>
+<span style="font-family: 'Instrument Serif', serif; font-size: clamp(40px, 5vw, 72px); line-height: 1">Orbital</span>
+<span style="font-size: 15px">Arcade 2D · iOS y Android</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 12px">En producción
+<svg class="m-arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+</li>
+<li style="border-bottom: 1px solid #120d0a">
+<a class="m-row" href="#m-juegos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px 24px; align-items: center; padding: 32px 0; text-decoration: none; color: inherit">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">02</span>
+<span style="font-family: 'Instrument Serif', serif; font-size: clamp(40px, 5vw, 72px); line-height: 1"><em>Taller de antigüedades</em></span>
+<span style="font-size: 15px">Idle · restauración · nombre provisional</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 12px">Próximamente
+<svg class="m-arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+</li>
+</ul>
+</div>
+</section>
+
+<section id="m-demo" style="background: #120d0a; color: #f2ede4">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 32px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #e9a23b">◇ Juega ahora</span>
+<h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(44px, 6vw, 88px); line-height: 0.95">Un dedo.<br><em>Toda la gravedad.</em></h2>
+<p style="margin: 0; max-width: 34ch; color: #bfb3a3">Mantén pulsado para cargar. Suelta para salir disparado. En el aire, mantén para que el planeta te atraiga a la órbita interior.</p>
+<dl style="margin: 16px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; border-top: 1px solid #3a2a20; padding-top: 20px">
+<dt style="color: #bfb3a3">Exterior</dt><dd style="margin: 0">10 pts · 1 moneda</dd>
+<dt style="color: #bfb3a3">Interior</dt><dd style="margin: 0; color: #e9a23b">25 pts · 3 monedas</dd>
+</dl>
+</div>
+<div style="flex: 2 1 560px; min-width: 0">
+<dc-import name="DemoOrbital" minimal="{{ true }}" hint-size="100%,520px"></dc-import>
+</div>
+</div>
+</section>
+
+<section id="m-estudio" style="background: #f2ede4">
+<div style="max-width: 1360px; margin: 0 auto; padding: 160px 32px; display: flex; flex-direction: column; gap: 80px">
+<p style="margin: 0; font-family: 'Instrument Serif', serif; font-size: clamp(40px, 5.6vw, 92px); line-height: 1.04; letter-spacing: -1px; max-width: 18ch">Hacemos pocos juegos. Los hacemos <em style="color: #a8681c">a mano</em>, hasta que se sienten bien.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 48px; border-top: 1px solid #120d0a; padding-top: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">01</span><strong style="font-weight: 600; font-size: 20px">Se entiende en un segundo</strong><span style="color: #4a3d33">Mecánicas que se explican en una frase.</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">02</span><strong style="font-weight: 600; font-size: 20px">Se domina con horas</strong><span style="color: #4a3d33">La precisión y el ritmo marcan la diferencia.</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">03</span><strong style="font-weight: 600; font-size: 20px">[TERCER PRINCIPIO]</strong><span style="color: #4a3d33">[Una frase sobre el equipo o la forma de trabajar.]</span></div>
+</div>
+</div>
+</section>
+
+<section id="m-proceso" style="background: #e7dfd2">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 32px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px">
+<h2 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(48px, 7vw, 112px); line-height: 1">Del tronco <em>al juego</em></h2>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase">(03) — Proceso</span>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border-top: 1px solid #120d0a">
+<li style="padding: 28px 24px 40px 0; border-right: 1px solid #b9ad9c; display: flex; flex-direction: column; gap: 14px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase">Fase 01</span><span style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1">Idea</span><span style="color: #4a3d33; font-size: 15px">Buscamos una mecánica con chispa.</span></li>
+<li style="padding: 28px 24px 40px; border-right: 1px solid #b9ad9c; display: flex; flex-direction: column; gap: 14px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase">Fase 02</span><span style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1">Boceto</span><span style="color: #4a3d33; font-size: 15px">Prototipo jugable cuanto antes.</span></li>
+<li style="padding: 28px 24px 40px; border-right: 1px solid #b9ad9c; display: flex; flex-direction: column; gap: 14px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase">Fase 03</span><span style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1">Tallado</span><span style="color: #4a3d33; font-size: 15px">Pulimos hasta que se siente bien.</span></li>
+<li style="padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 14px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase">Fase 04</span><span style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1"><em>Lanzamiento</em></span><span style="color: #4a3d33; font-size: 15px">Y seguimos escuchando a quien juega.</span></li>
+</ol>
+</div>
+</section>
+
+<section id="m-contacto" style="background: #120d0a; color: #f2ede4; overflow: hidden">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 32px 40px; display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #e9a23b">◇ (04) Contacto</span>
+<a class="m-link" href="#m-contacto" style="color: #f2ede4; font-family: 'Instrument Serif', serif; font-size: clamp(44px, 6vw, 96px); line-height: 1">¿Hablamos?</a>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 15px">[CORREO@DOMINIO]</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 48px; align-content: end; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase">
+<a class="m-link" href="#m-contacto" style="color: #f2ede4">Instagram</a><a class="m-link" href="#m-contacto" style="color: #f2ede4">TikTok</a>
+<a class="m-link" href="#m-contacto" style="color: #f2ede4">X</a><a class="m-link" href="#m-contacto" style="color: #f2ede4">YouTube</a>
+<a class="m-link" href="#m-contacto" style="color: #f2ede4">Discord</a><a class="m-link" href="#m-contacto" style="color: #f2ede4">Press kit ↓</a>
+</div>
+</div>
+<p aria-hidden="true" style="margin: 0; font-family: 'Instrument Serif', serif; font-size: 17.5vw; line-height: 0.8; letter-spacing: -0.04em; white-space: nowrap; color: #2a1f19">WoodGames</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; border-top: 1px solid #3a2a20; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; color: #bfb3a3">
+<span>© 2026 WoodGames Studio</span>
+<span style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a class="m-link" href="#m-top" style="color: #bfb3a3">Aviso legal</a><a class="m-link" href="#m-top" style="color: #bfb3a3">Privacidad</a><a class="m-link" href="#m-top" style="color: #bfb3a3">Cookies</a></span>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { px: 0, py: 0 }; }
+  renderVals() {
+    return {
+      px: this.state.px, py: this.state.py,
+      move: (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        this.setState({ px: Math.round(nx * -40), py: Math.round(ny * -40) });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

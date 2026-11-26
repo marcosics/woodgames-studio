@@ -1,0 +1,24 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-26T17:05:00Z"},
+  "title": "WoodGames · Bocetos web",
+  "launch": {"view": "canvas", "page": "b"},
+  "pages": [
+    {"id": "a", "name": "Boceto A · Amigable"},
+    {"id": "b", "name": "Boceto B · Minimalista"}
+  ],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 4600, "title": "Inicio · WoodGames Studio", "expand": "fill", "is_interactive": true, "page": "a"},
+    "DemoOrbital.dc.html": {"x": 1520, "y": 0, "w": 960, "h": 560, "title": "Demo jugable · Orbital", "is_interactive": true, "page": "a"},
+    "Orbital.dc.html": {"x": 1520, "y": 680, "w": 1440, "h": 3400, "title": "Página del juego · Orbital", "expand": "fill", "page": "a"},
+    "MainMinimal.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 5200, "title": "B · Inicio minimalista", "expand": "fill", "is_interactive": true, "page": "b"}
+  },
+  "order": ["Main.dc.html", "DemoOrbital.dc.html", "Orbital.dc.html", "MainMinimal.dc.html"],
+  "notes": {
+    "titulo": {"x": 0, "y": -300, "text": "WoodGames Studio · Bocetos web v0.1", "kind": "title1", "maxW": 2960, "page": "a"},
+    "nota1": {"x": 2560, "y": 0, "w": 400, "fill": "orange", "size": "m", "text": "BOCETO, no diseño final.\n\nColores: sacados del logo y de las paletas 4 y 10 del documento (#18100d, #351000, #af7253, #d1b391, #ffd99b · espacio #242331).\n\nTipografía provisional: Luckiest Guy + Nunito (Google Fonts, uso comercial libre). Las de dafont elegidas son casi todas solo uso personal: hay que comprar licencia o cambiarlas.\n\nTextos entre [CORCHETES] = faltan datos reales.", "page": "a"},
+    "tituloB": {"x": 0, "y": -300, "text": "Boceto B · Minimalista editorial", "kind": "title1", "maxW": 1940, "page": "b"},
+    "notaB": {"x": 1520, "y": 0, "w": 420, "fill": "gray", "size": "m", "text": "Idea: «Anillos». Los anillos del tronco son también órbitas: une la madera con Orbital.\n\nInspiración (no copia): pixelarte.es (editorial, serif grande, mucho aire) y marcocreativo.es (etiquetas en mayúsculas, proceso por fases, contraste fuerte).\n\n3 colores: papel #f2ede4, tinta #120d0a, resina #e9a23b.\nTipografía: Instrument Serif + Inter + JetBrains Mono (Google Fonts, uso comercial libre).\n\nLa demo es la misma que la del boceto A, en versión sobria.", "page": "b"}
+  },
+  "designSystems": []
+}

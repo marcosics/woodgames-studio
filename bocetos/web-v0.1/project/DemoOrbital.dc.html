@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Demo jugable de Orbital</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;family=Nunito:wght@400;600;800&amp;display=swap">
+<style>
+body{margin:0}
+.orb-play:focus-visible{outline:4px solid #ffd99b;outline-offset:-4px}
+</style>
+</helmet>
+<div style="width: 100%; max-width: 960px; margin: 0 auto; font-family: 'Nunito', system-ui, sans-serif; color: #f6e8d0; background: #1b1a27; border: 4px solid #18100d; box-shadow: 8px 8px 0 #af7253; box-sizing: border-box">
+<div style="position: relative; width: 100%; aspect-ratio: 2 / 1; overflow: hidden; user-select: none; -webkit-user-select: none">
+<svg viewBox="0 0 960 480" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+<rect x="0" y="0" width="960" height="480" fill="#1b1a27"></rect>
+<sc-for list="{{stars}}" as="s" hint-placeholder-count="0">
+<circle cx="{{s.x}}" cy="{{s.y}}" r="{{s.r}}" fill="{{s.c}}"></circle>
+</sc-for>
+<sc-for list="{{planets}}" as="p" hint-placeholder-count="0">
+<g>
+<circle cx="{{p.x}}" cy="{{p.y}}" r="{{p.range}}" fill="none" stroke="#ffd99b" stroke-width="1.5" opacity="{{p.rangeOp}}"></circle>
+<circle cx="{{p.x}}" cy="{{p.y}}" r="{{p.outer}}" fill="none" stroke="#d1b391" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round" opacity="0.8"></circle>
+<circle cx="{{p.x}}" cy="{{p.y}}" r="{{p.inner}}" fill="none" stroke="#ffd99b" stroke-width="2" stroke-dasharray="7 7" opacity="0.9"></circle>
+<circle cx="{{p.x}}" cy="{{p.y}}" r="{{p.r}}" fill="{{p.color}}" stroke="#18100d" stroke-width="4"></circle>
+<circle cx="{{p.hx}}" cy="{{p.hy}}" r="{{p.hr}}" fill="#f6e8d0" opacity="0.35"></circle>
+</g>
+</sc-for>
+<sc-for list="{{trail}}" as="t" hint-placeholder-count="0">
+<circle cx="{{t.x}}" cy="{{t.y}}" r="{{t.r}}" fill="#ffd99b" opacity="{{t.o}}"></circle>
+</sc-for>
+<sc-if value="{{aiming}}" hint-placeholder-val="{{ false }}">
+<line x1="{{ball.x}}" y1="{{ball.y}}" x2="{{aim.x}}" y2="{{aim.y}}" stroke="#ffd99b" stroke-width="3" stroke-dasharray="4 8" stroke-linecap="round"></line>
+<circle cx="{{ball.x}}" cy="{{ball.y}}" r="20" fill="none" stroke="#ffd99b" stroke-width="4" pathLength="100" stroke-dasharray="{{chargeDash}}" transform="{{chargeRot}}"></circle>
+</sc-if>
+<circle cx="{{ball.x}}" cy="{{ball.y}}" r="11" fill="#ffd99b" stroke="#18100d" stroke-width="3"></circle>
+<circle cx="{{ball.hx}}" cy="{{ball.hy}}" r="3" fill="#ffffff" opacity="0.8"></circle>
+<sc-if value="{{gainShow}}" hint-placeholder-val="{{ false }}">
+<text x="{{gain.x}}" y="{{gain.y}}" text-anchor="middle" font-family="Luckiest Guy, cursive" font-size="26" fill="#ffd99b" stroke="#18100d" stroke-width="5" paint-order="stroke" opacity="{{gain.o}}">{{gain.text}}</text>
+</sc-if>
+</svg>
+
+<button type="button" class="orb-play" aria-label="Zona de juego: mantén pulsado para cargar o atraer, suelta para lanzar" onPointerDown="{{press}}" onPointerUp="{{release}}" onPointerLeave="{{release}}" onPointerCancel="{{release}}" onKeyDown="{{keyDown}}" onKeyUp="{{keyUp}}" onContextMenu="{{noMenu}}" style="position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; padding: 0; margin: 0; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent"></button>
+
+<div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; gap: 12px; pointer-events: none">
+<div style="display: flex; gap: 10px">
+<span style="background: #18100d; border: 2px solid #ffd99b; padding: 4px 12px; font-weight: 800; font-size: 16px">{{score}} pts</span>
+<span style="background: #18100d; border: 2px solid #d1b391; padding: 4px 12px; font-weight: 800; font-size: 16px; display: inline-flex; gap: 6px; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#ffd99b" stroke="#18100d" stroke-width="3"></circle></svg>{{coins}}</span>
+</div>
+<span style="background: #18100d; padding: 4px 12px; font-weight: 600; font-size: 14px; color: #d1b391">Récord {{best}}</span>
+</div>
+
+<sc-if value="{{showIntro}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; background: rgba(27,26,39,0.78); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center">
+<p style="margin: 0; font-family: 'Luckiest Guy', cursive; font-size: clamp(36px, 7vw, 64px); line-height: 1; color: #ffd99b">Orbital</p>
+<p style="margin: 0; max-width: 42ch; color: #f6e8d0; font-size: 16px">En órbita: mantén pulsado para cargar y suelta para lanzarte.<br>En el aire: mantén pulsado para que te atraiga el planeta más cercano y entrar en la órbita interior.</p>
+<button type="button" onClick="{{start}}" style="min-height: 52px; padding: 0 32px; font: inherit; font-weight: 800; font-size: 19px; background: #ffd99b; color: #18100d; border: 3px solid #18100d; box-shadow: 4px 4px 0 #af7253; cursor: pointer">Jugar</button>
+</div>
+</sc-if>
+
+<sc-if value="{{showOver}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: rgba(27,26,39,0.82); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center">
+<p style="margin: 0; font-family: 'Luckiest Guy', cursive; font-size: clamp(32px, 6vw, 56px); line-height: 1; color: #ffd99b">{{overTitle}}</p>
+<p style="margin: 0; font-size: 18px; color: #f6e8d0">{{score}} puntos · {{coins}} monedas · {{hops}} planetas</p>
+<button type="button" onClick="{{start}}" style="min-height: 52px; padding: 0 32px; font: inherit; font-weight: 800; font-size: 19px; background: #ffd99b; color: #18100d; border: 3px solid #18100d; box-shadow: 4px 4px 0 #af7253; cursor: pointer">Otra vez</button>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 16px; border-top: 4px solid #18100d; background: #242331; font-size: 15px; color: #d1b391">
+<span style="display: inline-flex; gap: 8px; align-items: center"><svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="#d1b391" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round"></line></svg>Órbita exterior: 10 pts · 1 moneda</span>
+<span style="display: inline-flex; gap: 8px; align-items: center"><svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="#ffd99b" stroke-width="2" stroke-dasharray="6 5"></line></svg>Órbita interior: 25 pts · 3 monedas</span>
+<span>Teclado: barra espaciadora</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":540}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.W = 960; this.H = 480;
+    this.colors = ['#af7253', '#d1b391', '#a27035', '#ddca7d', '#b88b4a', '#8b5d33'];
+    this.stars = [];
+    for (let i = 0; i < 70; i++) {
+      this.stars.push({ x: Math.random() * 960, y: Math.random() * 480, r: 0.6 + Math.random() * 1.6, d: 0.15 + Math.random() * 0.35, c: Math.random() < 0.2 ? '#ffd99b' : '#f6e8d0' });
+    }
+    this.best = 0;
+    this.reset('intro');
+    this.state = { f: 0 };
+  }
+  rnd(a, b) { return a + Math.random() * (b - a); }
+  newPlanet(prev) {
+    const r = this.rnd(22, 40);
+    return { x: prev.x + this.rnd(230, 320), y: this.rnd(100, 380), r: r, color: this.colors[Math.floor(Math.random() * this.colors.length)] };
+  }
+  reset(phase) {
+    const first = { x: 200, y: 250, r: 34, color: '#af7253' };
+    const planets = [first];
+    for (let i = 0; i < 6; i++) planets.push(this.newPlanet(planets[planets.length - 1]));
+    this.sim = {
+      phase: phase, planets: planets, mode: 'orbit', pi: 0, R: first.r + 46, ang: -Math.PI / 2, dir: 1,
+      x: first.x, y: first.y - (first.r + 46), vx: 0, vy: 0, charge: 0, holding: false, pressMode: null,
+      last: -1, cool: 0, flyT: 0, camX: 0, score: 0, coins: 0, hops: 0, trail: [], gain: null, overTitle: ''
+    };
+  }
+  componentDidMount() {
+    let prev = performance.now();
+    const loop = (now) => {
+      const dt = Math.min(0.033, (now - prev) / 1000);
+      prev = now;
+      this.step(dt);
+      this.setState({ f: (this.state.f + 1) % 100000 });
+      this.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+  }
+  componentWillUnmount() { if (this.raf) cancelAnimationFrame(this.raf); }
+  step(dt) {
+    const s = this.sim;
+    if (s.phase === 'over') { if (s.gain) s.gain.t -= dt; return; }
+    const playing = s.phase === 'play';
+    if (s.mode === 'orbit') {
+      const p = s.planets[s.pi];
+      const speed = s.R < p.r + 30 ? 250 : 190;
+      s.ang += (speed / s.R) * dt * s.dir;
+      s.x = p.x + Math.cos(s.ang) * s.R;
+      s.y = p.y + Math.sin(s.ang) * s.R;
+      if (playing && s.holding && s.pressMode === 'orbit') s.charge = Math.min(1, s.charge + dt / 0.9);
+    } else {
+      s.flyT += dt; s.cool -= dt;
+      s.target = -1;
+      if (s.holding) {
+        let best = -1, bd = 1e9;
+        s.planets.forEach((p, i) => {
+          if (i === s.last && s.cool > 0) return;
+          const d = Math.hypot(p.x - s.x, p.y - s.y);
+          if (d < p.r + 160 && d < bd) { bd = d; best = i; }
+        });
+        if (best >= 0) {
+          const p = s.planets[best];
+          s.vx += ((p.x - s.x) / bd) * 620 * dt;
+          s.vy += ((p.y - s.y) / bd) * 620 * dt;
+          s.target = best;
+        }
+      }
+      const sp = Math.hypot(s.vx, s.vy);
+      if (sp > 560) { s.vx *= 560 / sp; s.vy *= 560 / sp; }
+      s.x += s.vx * dt; s.y += s.vy * dt;
+      for (let i = 0; i < s.planets.length; i++) {
+        if (i === s.last && s.cool > 0) continue;
+        const p = s.planets[i];
+        const dx = s.x - p.x, dy = s.y - p.y, d = Math.hypot(dx, dy);
+        if (d < p.r + 9) { this.gameOver('¡Choque!'); return; }
+        const inner = p.r + 22, outer = p.r + 46;
+        const toInner = s.holding && d < inner + 4;
+        const toOuter = !s.holding && d < outer;
+        if (toInner || toOuter) {
+          const cross = dx * s.vy - dy * s.vx;
+          s.mode = 'orbit'; s.pi = i; s.R = toInner ? inner : outer; s.ang = Math.atan2(dy, dx); s.dir = cross >= 0 ? 1 : -1;
+          s.charge = 0; s.hops += 1; s.pressMode = s.holding ? 'fly' : null;
+          const pts = toInner ? 25 : 10, cn = toInner ? 3 : 1;
+          s.score += pts; s.coins += cn;
+          s.gain = { text: '+' + pts, x: p.x, y: p.y - p.r - 56, t: 1 };
+          if (i >= s.planets.length - 4) for (let k = 0; k < 3; k++) s.planets.push(this.newPlanet(s.planets[s.planets.length - 1]));
+          break;
+        }
+      }
+      if (s.mode === 'fly' && (s.y < -70 || s.y > this.H + 70 || s.x < s.camX - 70 || s.flyT > 3.6)) { this.gameOver('Perdido en el espacio'); return; }
+    }
+    if (s.gain) { s.gain.t -= dt; s.gain.y -= 30 * dt; if (s.gain.t <= 0) s.gain = null; }
+    const want = s.x - 320;
+    if (want > s.camX) s.camX += (want - s.camX) * Math.min(1, dt * 3);
+    s.trail.push({ x: s.x, y: s.y });
+    if (s.trail.length > 16) s.trail.shift();
+    s.planets = s.planets.filter((p) => p.x - s.camX > -400 || s.planets.indexOf(p) >= s.pi);
+  }
+  gameOver(title) {
+    const s = this.sim;
+    s.phase = 'over'; s.overTitle = title; s.holding = false;
+    if (s.score > this.best) this.best = s.score;
+  }
+  launch() {
+    const s = this.sim;
+    const tx = -Math.sin(s.ang) * s.dir, ty = Math.cos(s.ang) * s.dir;
+    const speed = 230 + s.charge * 290;
+    s.vx = tx * speed; s.vy = ty * speed;
+    s.mode = 'fly'; s.last = s.pi; s.cool = 0.4; s.flyT = 0; s.charge = 0;
+  }
+  down() {
+    const s = this.sim;
+    if (s.phase !== 'play' || s.holding) return;
+    s.holding = true; s.pressMode = s.mode;
+  }
+  up() {
+    const s = this.sim;
+    if (!s.holding) return;
+    s.holding = false;
+    if (s.phase === 'play' && s.mode === 'orbit' && s.pressMode === 'orbit') this.launch();
+    s.pressMode = null;
+  }
+  renderVals() {
+    const s = this.sim, cam = s.camX;
+    const ball = { x: s.x - cam, y: s.y, hx: s.x - cam - 3, hy: s.y - 4 };
+    const planets = s.planets
+      .filter((p) => p.x - cam > -140 && p.x - cam < this.W + 140)
+      .map((p) => {
+        const idx = s.planets.indexOf(p);
+        return {
+          x: p.x - cam, y: p.y, r: p.r, inner: p.r + 22, outer: p.r + 46, range: p.r + 160, color: p.color,
+          rangeOp: s.mode === 'fly' && s.target === idx ? 0.5 : 0,
+          hx: p.x - cam - p.r * 0.35, hy: p.y - p.r * 0.35, hr: p.r * 0.28
+        };
+      });
+    const stars = this.stars.map((st) => {
+      let x = (st.x - cam * st.d) % this.W; if (x < 0) x += this.W;
+      return { x: x, y: st.y, r: st.r, c: st.c };
+    });
+    const n = s.trail.length;
+    const trail = s.trail.map((t, i) => ({ x: t.x - cam, y: t.y, r: 2 + (i / n) * 7, o: (i / n) * 0.45 }));
+    const aiming = s.phase === 'play' && s.mode === 'orbit' && s.holding && s.pressMode === 'orbit';
+    const len = 40 + s.charge * 130;
+    const aim = { x: ball.x - Math.sin(s.ang) * s.dir * len, y: ball.y + Math.cos(s.ang) * s.dir * len };
+    const gain = s.gain ? { text: s.gain.text, x: s.gain.x - cam, y: s.gain.y, o: Math.max(0, Math.min(1, s.gain.t * 1.5)) } : { text: '', x: 0, y: 0, o: 0 };
+    const keyOk = (e) => e.key === ' ' || e.key === 'Enter';
+    return {
+      stars, planets, trail, ball, aim, aiming, gain, gainShow: !!s.gain,
+      chargeDash: Math.round(s.charge * 100) + ' 100',
+      chargeRot: 'rotate(-90 ' + ball.x + ' ' + ball.y + ')',
+      score: s.score, coins: s.coins, hops: s.hops, best: this.best,
+      showIntro: s.phase === 'intro', showOver: s.phase === 'over', overTitle: s.overTitle,
+      start: () => { this.reset('play'); },
+      press: (e) => { if (e && e.preventDefault) e.preventDefault(); this.down(); },
+      release: () => { this.up(); },
+      keyDown: (e) => { if (keyOk(e)) { e.preventDefault(); if (!e.repeat) this.down(); } },
+      keyUp: (e) => { if (keyOk(e)) { e.preventDefault(); this.up(); } },
+      noMenu: (e) => { e.preventDefault(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

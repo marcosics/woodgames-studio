@@ -17,4 +17,6 @@ WoodGames Studio es una desarrolladora de videojuegos nueva. Este repositorio re
   - `web-propuesta/`: método del usuario
 - **`marca/`:** borrador de sistema de diseño que se hizo sin que se pidiera. Está apartado: no se usa como referencia salvo que el usuario lo diga. También está publicado como artefacto privado en https://claude.ai/artifact/NTbaXb51qJ4AeuJzy7W5vZ.
 - **`docs/lista-marca.md`:** lista de decisiones de marca, con casillas para marcar lo decidido.
+- **`bocetos/web-v0.1/`:** primeros bocetos de la web (inicio, demo jugable de Orbital, página de Orbital), publicados en el lienzo privado https://claude.ai/artifact/PYTGWDTfNDVD8T6Q1YeG6H. Son bocetos, no diseño final.
+- **Primer juego: Orbital** (arcade 2D de gravedad para iOS/Android, en producción). Futuro: "Taller de antigüedades" (nombre provisional).
 - **Referencias de webs que dio el usuario:** https://pixelarte.es/ y https://www.iukanet.com/

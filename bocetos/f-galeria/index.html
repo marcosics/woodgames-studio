@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WoodGames · Boceto F</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600&display=swap">
+<link rel="stylesheet" href="orbital-bg.css">
+<link rel="stylesheet" href="orbital-bg-negro.css">
+<style>
+/* Boceto F · galería. Inspiración: Pixelarte (negro, imagen grande con el nombre encima,
+   mosaico de trabajos con filtros, fichas de servicios y pie a todo color con el nombre enorme). */
+:root {
+  --f-bg: #000000;
+  --f-text: #f4f4f2;
+  --f-soft: #a9a9a4;
+  --f-line: rgba(244, 244, 242, .22);
+  --f-tile: #111111;
+  --f-amber: #f2a93b;
+  --f-amber-ink: #120c03;
+  --f-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-tight: "Inter Tight", "Inter", system-ui, sans-serif;
+  color-scheme: dark;
+}
+body { background: var(--f-bg); color: var(--f-text); font-family: var(--f-sans); font-size: 15px; line-height: 1.5; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--f-amber); outline-offset: 3px; }
+.f-pad { box-sizing: border-box; padding-left: max(14px, env(safe-area-inset-left, 0px)); padding-right: max(14px, env(safe-area-inset-right, 0px)); }
+.f-col { max-width: 1040px; margin: 0 auto; box-sizing: border-box; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+.f-top { display: flex; justify-content: space-between; align-items: center; padding-block: 12px; font-size: 14px; }
+.f-top a { text-decoration: none; }
+.f-top button { width: 44px; height: 44px; background: none; border: 0; color: var(--f-text); cursor: pointer; display: grid; place-content: center; gap: 4px; }
+.f-top button i { display: block; width: 18px; height: 1.5px; background: currentColor; }
+
+/* Imagen grande con el nombre encima: aquí la imagen es el fondo del juego, vivo */
+.f-hero { position: relative; isolation: isolate; overflow: hidden; border-radius: 6px; height: clamp(360px, 62vh, 640px); display: flex; align-items: center; justify-content: space-between; padding-inline: clamp(16px, 2.4vw, 32px); }
+.f-hero .orbital-bg { position: absolute; z-index: -1; }
+.f-hero span { font: 500 clamp(22px, 2.4vw, 32px)/1 var(--f-tight); }
+
+.f-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px; padding-block: 28vh 120px; align-items: end; }
+.f-intro p { margin: 0; }
+.f-intro .f-lead { font-weight: 500; }
+.f-intro .f-body { color: var(--f-soft); font-size: 13px; max-width: 52ch; }
+
+.f-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 20px; }
+.f-head h2 { margin: 0; font: 500 22px/1.2 var(--f-tight); }
+.f-head a { text-decoration: none; display: inline-flex; gap: 8px; align-items: center; font-size: 14px; }
+
+.f-filters { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; padding-bottom: 22px; }
+.f-filters button { font: 400 14px/1 var(--f-sans); color: var(--f-text); background: none; border: 1px solid transparent; border-radius: 999px; padding: 8px 12px; min-height: 36px; cursor: pointer; }
+.f-filters button[aria-pressed="true"] { border-color: var(--f-text); }
+
+/* Mosaico: piezas de tamaños distintos, sin texto encima salvo un rótulo al pasar */
+.f-grid { display: grid; grid-auto-flow: row dense; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: clamp(120px, 14vw, 210px); gap: 8px; }
+.f-tile { position: relative; overflow: hidden; border-radius: 4px; background: var(--f-tile); isolation: isolate; text-decoration: none; display: flex; align-items: flex-end; }
+.f-tile[hidden] { display: none !important; }
+.f-tile .orbital-bg, .f-tile .orbital-bgn { position: absolute; z-index: -1; }
+.f-tile figcaption, .f-tile .f-cap { position: relative; margin: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); font-size: 12px; opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease; }
+.f-tile:hover .f-cap, .f-tile:focus-visible .f-cap { opacity: 1; transform: none; }
+.f-w4 { grid-column: span 4; grid-row: span 2; }
+.f-w2 { grid-column: span 2; grid-row: span 2; }
+.f-w2s { grid-column: span 2; }
+.f-w3 { grid-column: span 3; grid-row: span 2; }
+.f-title { position: absolute; inset: 0; display: grid; place-items: center; font: 500 clamp(28px, 4vw, 60px)/1 var(--f-tight); letter-spacing: .08em; z-index: -1; }
+.f-logo { position: absolute; inset: 0; display: grid; place-items: center; z-index: -1; }
+.f-logo img { width: 56%; max-width: 300px; height: auto; }
+.f-ph { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 16px; color: var(--f-soft); font-size: 13px; border: 1px dashed var(--f-line); border-radius: 4px; z-index: -1; }
+
+.f-services { padding-block: 140px 120px; }
+.f-cards { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.f-card { border: 1px solid var(--f-line); border-radius: 4px; min-height: 220px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+.f-card h3 { margin: 0; font: 500 16px/1.2 var(--f-tight); }
+.f-card p { margin: 0; color: var(--f-soft); font-size: 13px; }
+
+.f-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.f-pill { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border: 1px solid var(--f-text); border-radius: 999px; text-decoration: none; font-size: 14px; }
+.f-pill:hover { background: var(--f-text); color: var(--f-bg); }
+
+/* Pie a todo color con el nombre enorme */
+.f-foot { background: var(--f-amber); color: var(--f-amber-ink); overflow: hidden; }
+.f-foot a { color: var(--f-amber-ink); }
+.f-foot__grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 40px; padding-block: 56px 24px; align-items: start; }
+.f-badge { width: clamp(120px, 14vw, 180px); aspect-ratio: 1; border: 6px solid var(--f-amber-ink); border-radius: 50%; display: grid; place-items: center; font: 600 clamp(44px, 6vw, 76px)/1 var(--f-tight); }
+.f-foot nav { display: flex; flex-wrap: wrap; gap: 8px 28px; font: 500 14px/1 var(--f-tight); text-transform: uppercase; letter-spacing: .04em; }
+.f-foot nav a { text-decoration: none; padding-block: 6px; }
+.f-foot__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; font-size: 13px; }
+.f-foot__cols p { margin: 0; }
+.f-news { display: flex; gap: 8px; border-bottom: 1px solid var(--f-amber-ink); max-width: 280px; margin-top: 10px; }
+.f-news input { flex: 1; min-width: 0; background: transparent; border: 0; font: inherit; color: var(--f-amber-ink); padding: 8px 0; }
+.f-news input::placeholder { color: rgba(18,12,3,.6); }
+.f-news button { background: none; border: 0; font: inherit; color: var(--f-amber-ink); cursor: pointer; min-width: 44px; min-height: 40px; }
+.f-giant { margin: 0; font: 600 clamp(48px, 13.5vw, 230px)/.82 var(--f-tight); letter-spacing: -.04em; white-space: nowrap; padding-top: 24px; }
+.f-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; font-size: 11px; padding-block: 14px 18px; }
+
+@media (max-width: 760px) {
+  .f-intro { grid-template-columns: 1fr; padding-block: 18vh 80px; }
+  .f-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 160px; }
+  .f-w4, .f-w3 { grid-column: span 2; grid-row: span 2; }
+  .f-w2 { grid-column: span 1; grid-row: span 1; }
+  .f-w2s { grid-column: span 1; }
+  .f-foot__grid { grid-template-columns: 1fr; }
+  .f-foot__cols { grid-template-columns: 1fr; }
+  .f-tile .f-cap { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .f-tile .f-cap { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="f-pad f-top">
+  <a href="#f-inicio">WoodGames®</a>
+  <button type="button" aria-label="Abrir menú"><i></i><i></i></button>
+</header>
+
+<main id="f-inicio">
+  <div class="f-pad">
+    <section class="f-hero" aria-label="Orbital, nuestro primer juego">
+      <div class="orbital-bg" data-orbital-bg></div>
+      <span>WoodGames</span>
+      <span>Orbital</span>
+    </section>
+  </div>
+
+  <section class="f-col f-intro">
+    <p class="f-lead">2026 · Nuestro primer juego, Orbital, está en producción.</p>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <p class="f-body">WoodGames Studio es un estudio de videojuegos nuevo. [Dos o tres líneas sobre quiénes sois, desde dónde y qué tipo de juegos hacéis].</p>
+      <p class="f-body">Orbital es un arcade 2D para iOS y Android: un pequeño meteorito viaja de planeta en planeta usando la gravedad.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-works">
+    <div class="f-col f-head"><h2 id="f-works">Últimos trabajos</h2><a href="#f-works">Ver todos <span aria-hidden="true">→</span></a></div>
+    <div class="f-col f-filters" role="group" aria-label="Filtrar trabajos">
+      <button type="button" data-f="todo" aria-pressed="true">Todo</button>
+      <button type="button" data-f="juegos" aria-pressed="false">Juegos</button>
+      <button type="button" data-f="arte" aria-pressed="false">Arte</button>
+      <button type="button" data-f="identidad" aria-pressed="false">Identidad</button>
+      <button type="button" data-f="devlog" aria-pressed="false">Devlog</button>
+    </div>
+    <div class="f-pad">
+      <div class="f-grid">
+        <a class="f-tile f-w4" data-cat="juegos" href="#f-works"><div class="orbital-bgn" data-orbital-bgn></div><span class="f-title">ORBITAL</span><span class="f-cap">Orbital · arcade 2D · en producción</span></a>
+        <a class="f-tile f-w2" data-cat="identidad" href="#f-works" style="background:#e8dcc8"><span class="f-logo"><img src="logo-wg.png" alt="Logotipo WG en un tronco cortado"></span><span class="f-cap">Identidad · logotipo WoodGames</span></a>
+        <a class="f-tile f-w2" data-cat="arte" href="#f-works"><span class="f-ph">Arte de Orbital<br>Planetas</span><span class="f-cap">Arte · planetas</span></a>
+        <a class="f-tile f-w2s" data-cat="arte" href="#f-works"><span class="f-ph">Arte de Orbital<br>La Bola</span><span class="f-cap">Arte · La Bola</span></a>
+        <a class="f-tile f-w2s" data-cat="devlog" href="#f-works" style="background:#16151f"><span class="f-ph" style="border-style:solid">Devlog · 22/11/2026<br>El bucle de juego de Orbital</span><span class="f-cap">Devlog</span></a>
+        <a class="f-tile f-w2s" data-cat="juegos" href="#f-works" style="background:#1a140f"><span class="f-ph">Taller de antigüedades<br>Próximamente</span><span class="f-cap">Taller de antigüedades · idle</span></a>
+        <a class="f-tile f-w2s" data-cat="identidad" href="#f-works" style="background:#d9d8d4"><span class="f-logo"><img src="logo-wg-gris.png" alt="Logotipo WG en escala de grises"></span><span class="f-cap">Identidad · versión en grises</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-col f-services" aria-labelledby="f-serv">
+    <p class="f-lead" style="margin:0 0 20px;font-weight:500;max-width:40ch">Juegos móviles, arte y desarrollo. Sigue el proceso en el devlog o escríbenos.</p>
+    <div class="f-cta" style="margin-bottom:72px"><a class="f-pill" href="#f-contacto">¿Hablamos? <span aria-hidden="true">→</span></a><a class="f-pill" href="#f-contacto">Prensa <span aria-hidden="true">→</span></a></div>
+    <div class="f-head"><h2 id="f-serv">El estudio</h2><a href="#f-serv">Ver todo <span aria-hidden="true">→</span></a></div>
+    <div class="f-cards">
+      <article class="f-card"><h3>Juegos</h3><p>Orbital, en producción. Taller de antigüedades, próximamente.</p></article>
+      <article class="f-card"><h3>Arte</h3><p>Planetas, La Bola y fondos de Orbital.</p></article>
+      <article class="f-card"><h3>Devlog</h3><p>Cómo se hace cada juego, paso a paso.</p></article>
+      <article class="f-card"><h3>Prensa</h3><p>Logos, capturas, descripción y contacto.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer class="f-foot" id="f-contacto">
+  <div class="f-col">
+    <div class="f-foot__grid">
+      <div class="f-badge" aria-hidden="true">W.</div>
+      <div>
+        <nav aria-label="Pie"><a href="#f-inicio">Estudio</a><a href="#f-works">Juegos</a><a href="#f-works">Devlog</a><a href="#f-contacto">Contacto</a></nav>
+        <div class="f-foot__cols">
+          <div>
+            <p>Novedades de Orbital en tu correo.</p>
+            <form class="f-news" onsubmit="event.preventDefault()"><label for="f-mail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tu correo</label><input id="f-mail" type="email" placeholder="Tu e-mail"><button type="submit" aria-label="Apuntarme">→</button></form>
+          </div>
+          <p><b>Dirección</b><br>[Ciudad], España</p>
+          <p><b>Contacto</b><br>[correo@dominio]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="f-giant f-pad" aria-hidden="true">WoodGames.Studio</p>
+  <div class="f-col f-legal"><span>© 2026 WoodGames Studio</span><span>Aviso legal · Privacidad · Cookies</span></div>
+</footer>
+
+<script src="orbital-bg.js" defer></script>
+<script src="orbital-bg-negro.js" defer></script>
+<script>
+(function () {
+  var btns = document.querySelectorAll('[data-f]'), tiles = document.querySelectorAll('[data-cat]');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f');
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      tiles.forEach(function (t) { t.hidden = !(f === 'todo' || t.getAttribute('data-cat') === f); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WoodGames · Boceto E</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700&family=Cormorant+Garamond:wght@300&display=swap">
+<link rel="stylesheet" href="orbital-bg-negro.css">
+<style>
+/* Boceto E · tipográfico. Inspiración: Wooo! (lista que alterna palo seco y serif, filas a dos columnas)
+   y Dgrees (principios con icono pixel sobre cuadrícula). Solo tipo, líneas y el fondo de Orbital al pasar por encima. */
+:root {
+  --e-paper: #e8e6e1;
+  --e-ink: #0e0e0e;
+  --e-soft: #55534e;
+  --e-line: #0e0e0e;
+  --e-grid: #d3d0c9;
+  --e-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --e-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  color-scheme: light;
+}
+body { background: var(--e-paper); color: var(--e-ink); font-family: var(--e-sans); font-size: 14px; line-height: 1.45; }
+.e-wrap { box-sizing: border-box; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.e-small { font-size: 11px; line-height: 1.35; letter-spacing: .02em; text-transform: uppercase; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--e-ink); outline-offset: 3px; }
+
+.e-top { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; }
+.e-top a { text-decoration: none; font-weight: 700; }
+.e-menu { width: 44px; height: 44px; display: grid; place-content: center; gap: 4px; background: none; border: 0; padding: 0; cursor: pointer; }
+.e-menu i { display: block; width: 22px; height: 2px; background: var(--e-ink); }
+
+/* Marca en movimiento: una sola línea, como en Wooo! */
+.e-marquee { overflow: hidden; padding-block: 22vh 8vh; }
+.e-marquee__track { display: flex; width: max-content; gap: 6vw; align-items: baseline; animation: e-marq 40s linear infinite; white-space: nowrap; }
+.e-marquee__track span { font-weight: 500; font-size: clamp(40px, 6.4vw, 104px); letter-spacing: .14em; line-height: 1; }
+.e-marquee__track em { font-family: var(--e-serif); font-style: normal; font-weight: 300; font-size: clamp(52px, 8vw, 128px); line-height: 1; }
+@keyframes e-marq { to { transform: translateX(-50%); } }
+
+.e-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; padding-block: 14px 44px; }
+.e-row p { margin: 0; }
+
+/* Lista de trabajos: alterna palo seco en negrita y serif fina */
+.e-list { list-style: none; margin: 40px 0 0; padding: 0; }
+.e-list li { position: relative; border-top: 1px solid var(--e-line); }
+.e-list li:last-child { border-bottom: 1px solid var(--e-line); }
+.e-list a { display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); align-items: start; gap: 12px; text-decoration: none; padding-block: 2px 4px; }
+.e-name { font-size: clamp(30px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.01em; text-transform: uppercase; }
+.e-name--sans { font-weight: 700; }
+.e-name--serif { font-family: var(--e-serif); font-weight: 300; letter-spacing: 0; }
+.e-meta { text-align: right; padding-top: 8px; }
+.e-meta b { display: block; font-weight: 700; }
+.e-num { padding-top: 8px; }
+.e-list a:hover .e-name { font-style: italic; }
+
+/* Vista previa al pasar por Orbital: el fondo negro del juego en una ventanita que sigue al cursor */
+.e-peek { position: fixed; left: 0; top: 0; width: 320px; height: 200px; pointer-events: none; z-index: 20; opacity: 0; transform: translate3d(-999px, -999px, 0) scale(.92); transition: opacity .25s ease, scale .25s ease; overflow: hidden; }
+.e-peek.is-on { opacity: 1; }
+.e-peek .orbital-bgn { position: absolute; }
+.e-peek span { position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* Principios con icono pixel (como el "Approach" de Dgrees) */
+.e-approach { padding-block: 120px 40px; }
+.e-approach h2 { margin: 0 0 8px; font-family: var(--e-serif); font-weight: 300; font-size: clamp(44px, 6vw, 96px); line-height: 1; text-transform: uppercase; }
+.e-principle { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; align-items: end; padding-block: 28px; border-top: 1px solid var(--e-line); }
+.e-principle h3 { margin: 0; align-self: start; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.05; font-weight: 500; }
+.e-principle p { margin: 0; max-width: 34ch; color: var(--e-soft); font-size: 14px; }
+.e-pixel { width: 100%; max-width: 320px; aspect-ratio: 1; image-rendering: pixelated; display: block; }
+
+.e-info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; padding-block: 80px 48px; }
+.e-info p { margin: 0; }
+.e-foot { display: flex; justify-content: flex-end; padding-block: 14px 22px; border-top: 1px solid var(--e-line); }
+
+@media (max-width: 720px) {
+  .e-list a { grid-template-columns: minmax(0, 1fr) auto; }
+  .e-num { display: none; }
+  .e-meta { grid-column: 1 / -1; text-align: left; padding: 0 0 10px; }
+  .e-principle { grid-template-columns: 1fr; }
+  .e-pixel { max-width: 220px; }
+  .e-peek { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .e-marquee__track { animation: none; } .e-peek { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="e-wrap e-top">
+  <a href="#e-inicio" class="e-small">WoodGames®</a>
+  <button class="e-menu" type="button" aria-label="Abrir menú"><i></i><i></i><i></i></button>
+</header>
+
+<main id="e-inicio">
+  <div class="e-marquee" aria-label="WoodGames Studio">
+    <div class="e-marquee__track" aria-hidden="true">
+      <span>WOODGAMES STUDIO</span><em>W</em><span>WOODGAMES STUDIO</span><em>G</em>
+      <span>WOODGAMES STUDIO</span><em>W</em><span>WOODGAMES STUDIO</span><em>G</em>
+    </div>
+  </div>
+
+  <div class="e-wrap">
+    <div class="e-row e-small">
+      <p><b>Juegos</b><br>01 — 02</p>
+      <p>Estudio independiente de videojuegos.<br>[Una línea sobre el estudio].</p>
+    </div>
+
+    <ul class="e-list" aria-label="Trabajos">
+      <li>
+        <a href="#e-inicio" data-peek="Orbital · en producción">
+          <span class="e-name e-name--sans">Orbital</span>
+          <span class="e-num e-small">01</span>
+          <span class="e-meta e-small"><b>Arcade 2D de gravedad</b>iOS — Android — En producción</span>
+        </a>
+      </li>
+      <li>
+        <a href="#e-inicio">
+          <span class="e-name e-name--serif">Taller de antigüedades</span>
+          <span class="e-num e-small">02</span>
+          <span class="e-meta e-small"><b>Idle de restauración</b>Nombre provisional — Próximamente</span>
+        </a>
+      </li>
+      <li>
+        <a href="#e-inicio">
+          <span class="e-name e-name--sans">Arte</span>
+          <span class="e-num e-small">03</span>
+          <span class="e-meta e-small"><b>Arte de los juegos</b>Planetas — La Bola — Fondos</span>
+        </a>
+      </li>
+      <li>
+        <a href="#e-inicio">
+          <span class="e-name e-name--serif">Devlog</span>
+          <span class="e-num e-small">04</span>
+          <span class="e-meta e-small"><b>Diario de desarrollo</b>Cómo se hace cada juego</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <section class="e-wrap e-approach" aria-labelledby="e-approach-t">
+    <h2 id="e-approach-t">Cómo jugamos</h2>
+    <p class="e-small" style="margin:0 0 40px">{ Lo que tienen en común nuestros juegos · textos provisionales }</p>
+
+    <div class="e-principle">
+      <h3>Se entiende<br>en un segundo</h3>
+      <canvas class="e-pixel" data-pixel="bola" width="16" height="16" role="img" aria-label="La Bola en pixel art"></canvas>
+      <p>Un solo dedo. Mantén para atraer y cargar, suelta para lanzarte. No hace falta tutorial.</p>
+    </div>
+    <div class="e-principle">
+      <h3>Se domina<br>con horas</h3>
+      <canvas class="e-pixel" data-pixel="planeta" width="16" height="16" role="img" aria-label="Planeta con órbita en pixel art"></canvas>
+      <p>Dos órbitas por planeta: la segura y la que da más puntos. El ritmo y la precisión marcan la diferencia.</p>
+    </div>
+    <div class="e-principle">
+      <h3>Hecho<br>a mano</h3>
+      <canvas class="e-pixel" data-pixel="tronco" width="16" height="16" role="img" aria-label="Tronco cortado en pixel art"></canvas>
+      <p>[Texto sobre el estudio y su forma de trabajar].</p>
+    </div>
+  </section>
+
+  <section class="e-wrap">
+    <div class="e-info e-small">
+      <p><b>El estudio</b></p>
+      <p>[Quiénes sois y desde dónde. Una o dos líneas].</p>
+      <p><b>Contacto</b><br>WoodGames Studio</p>
+      <p>[correo@dominio]<br>[www.dominio]</p>
+      <p><b>[Ciudad]</b><br>España</p>
+      <p>Instagram<br>TikTok<br>YouTube<br>Discord</p>
+    </div>
+  </section>
+</main>
+
+<footer class="e-wrap e-foot e-small">WoodGames® · © 2026</footer>
+
+<div class="e-peek" aria-hidden="true"><div class="orbital-bgn" data-orbital-bgn></div><span></span></div>
+
+<script src="orbital-bg-negro.js" defer></script>
+<script>
+(function () {
+  // Iconos pixel 16×16 sobre cuadrícula, dibujados a mano celda a celda
+  var PAL = { k: '#0e0e0e', a: '#f2a93b', y: '#ffd99b', w: '#fff3d6', v: '#5a46b0', d: '#2a1f66', b: '#8b5d33', c: '#d1a46c', l: '#e9c690', o: '#3c2414' };
+  var ART = {
+    bola: [
+      '................', '................', '................', '......kkkk......', '....kkaaaakk....', '...kaayyaaaak...',
+      '...kawwyaaaak...', '..kaayyaaaaaak..', '..kaaaaaaaaaak..', '..kaaaaaaaaaak..', '...kaaaaaaaak...', '...kaaaaaaaak...',
+      '....kkaaaakk....', '......kkkk......', '................', '................'],
+    planeta: [
+      '................', '.....kkkkkk.....', '...kk......kk...', '..k...kkkk...k..', '.k...kvvvvk...k.', '.k..kvwvvvdk..k.',
+      'k..kvvvvvvddk..k', 'k..kvvvvvdddk..k', 'k..kvvvvddddk..k', 'k..kvvvddddk...k', '.k..kvdddddk..ak', '.k...kddddk...k.',
+      '..k...kkkk...k..', '...kk......kk...', '.....kkkkkk.....', '................'],
+    tronco: [
+      '................', '.....oooooo.....', '...oobbbbbboo...', '..obcccccccbbo..', '.obclllllllcbo..', '.obclcccccclcbo.',
+      'obclclllllclcbo.', 'obclclcyyclclcbo', 'obclclcyyclclcbo', 'obclclllllclcbo.', '.obclcccccclcbo.', '.obclllllllcbo..',
+      '..obcccccccbbo..', '...oobbbbbboo...', '.....oooooo.....', '................']
+  };
+  var cells = document.querySelectorAll('[data-pixel]');
+  for (var i = 0; i < cells.length; i++) {
+    var cv = cells[i], g = cv.getContext('2d'), rows = ART[cv.getAttribute('data-pixel')];
+    var S = 20; cv.width = 16 * S; cv.height = 16 * S;
+    g.fillStyle = '#efede8'; g.fillRect(0, 0, cv.width, cv.height);
+    g.strokeStyle = '#d3d0c9'; g.lineWidth = 1;
+    for (var n = 0; n <= 16; n++) { g.beginPath(); g.moveTo(n * S + .5, 0); g.lineTo(n * S + .5, cv.height); g.moveTo(0, n * S + .5); g.lineTo(cv.width, n * S + .5); g.stroke(); }
+    for (var y = 0; y < 16; y++) for (var x = 0; x < 16; x++) {
+      var ch = (rows[y] || '')[x];
+      if (ch && PAL[ch]) { g.fillStyle = PAL[ch]; g.fillRect(x * S, y * S, S, S); }
+    }
+  }
+
+  // Vista previa del fondo de Orbital siguiendo el cursor
+  var peek = document.querySelector('.e-peek'), label = peek.querySelector('span');
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var px = -999, py = -999, tx = -999, ty = -999, on = false, raf = 0;
+  function tick() {
+    px += (tx - px) * (reduced ? 1 : .18); py += (ty - py) * (reduced ? 1 : .18);
+    peek.style.transform = 'translate3d(' + (px + 24).toFixed(1) + 'px,' + (py - 100).toFixed(1) + 'px,0)';
+    raf = on || Math.abs(tx - px) > .5 ? requestAnimationFrame(tick) : 0;
+  }
+  document.querySelectorAll('[data-peek]').forEach(function (a) {
+    a.addEventListener('pointerenter', function (e) { on = true; label.textContent = a.getAttribute('data-peek'); px = tx = e.clientX; py = ty = e.clientY; peek.classList.add('is-on'); if (!raf) raf = requestAnimationFrame(tick); });
+    a.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; });
+    a.addEventListener('pointerleave', function () { on = false; peek.classList.remove('is-on'); });
+  });
+})();
+</script>
+</body>
+</html>

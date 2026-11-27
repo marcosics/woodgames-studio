@@ -106,6 +106,7 @@ Bocetos actuales en `bocetos/README.md`:
 - **C · Portada Orbital:** el fondo del juego (nebulosas violeta y azul, estrellas) en parallax como portada de toda la web para promocionar Orbital. Planetas, La Bola en ámbar (único color cálido) y el cursor como lente de gravedad. Código web real en `bocetos/c-portada-orbital/`.
 - **D · Fondos de Orbital:** los dos fondos del juego sin añadir nada inventado. Nebulosa en la portada y fondo negro en Juegos, dentro de una ventana que se abre con el scroll. En `bocetos/d-orbital-fondos/`.
 - **E · Tipográfico, F · Galería y G · Caso Orbital:** a partir de las referencias de Dgrees, Pixelarte y Wooo! que envió el cliente. Falta un cuarto boceto con la última referencia que tiene que enviar.
+- **H · Completo:** después de que el cliente dijera que los bocetos anteriores estaban incompletos y eran malos, se hizo uno completo y probado. Lleva pósteres de tela, logo tallado con luz, los fondos de Orbital y un índice claro. Es la referencia de calidad para los siguientes: completo, probado y sin huecos de diseño.
 - **Criterio del cliente:** "limpio, minimalista y disruptivo" significa enseñar solo lo justo. No hay que inventar elementos raros. Inspírate en las referencias, pero no inventes.
 
 ## 8. Arte de los juegos (Orbital)

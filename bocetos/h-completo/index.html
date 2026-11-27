@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WoodGames · Boceto H</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Doto:wght@700;900&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="orbital-bg.css">
+<link rel="stylesheet" href="orbital-bg-negro.css">
+<link rel="stylesheet" href="h.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="h-rough" x="-2%" y="-10%" width="104%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="h-loader" aria-hidden="true"><div class="h-loader__box"><span>CARGANDO</span><div class="h-loader__bar"><i></i></div></div></div>
+<div class="h-grain" aria-hidden="true"></div>
+
+<header class="h-head h-gut h-label">
+  <a href="#inicio">WoodGames<br>Studio</a>
+  <p>Estudio independiente<br>de videojuegos</p>
+  <nav aria-label="Principal"><a href="#juegos">Juegos</a><a href="#estudio">Estudio</a><a href="#orbital">Orbital</a><a href="#devlog">Devlog</a></nav>
+  <a class="h-cta" href="#contacto">Contacto</a>
+</header>
+
+<main>
+  <!-- /01 Portada: el fondo del juego y el nombre del próximo lanzamiento -->
+  <section class="h-hero" id="inicio" aria-labelledby="h-title">
+    <div class="orbital-bg" data-orbital-bg></div>
+    <div class="h-hero__kick h-label"><span>Próximo lanzamiento · iOS y Android</span></div>
+    <h1 class="h-hero__word" id="h-title" aria-label="Orbital"><span style="--i:0" aria-hidden="true">O</span><span style="--i:1" aria-hidden="true">R</span><span style="--i:2" aria-hidden="true">B</span><span style="--i:3" aria-hidden="true">I</span><span style="--i:4" aria-hidden="true">T</span><span style="--i:5" aria-hidden="true">A</span><span style="--i:6" aria-hidden="true">L</span></h1>
+    <div class="h-hero__meta h-gut h-label">
+      <p>(Desliza)</p>
+      <p>Arcade 2D de gravedad.<br>Un solo dedo.</p>
+      <p><a class="h-btn h-btn--solid" href="#contacto">Avísame del lanzamiento</a></p>
+      <p class="h-dot" style="font-size:14px">/01</p>
+    </div>
+  </section>
+
+  <!-- /02 El estudio -->
+  <section class="h-sec" id="estudio" aria-labelledby="h-estudio">
+    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/02</p><h2 id="h-estudio" class="h-label" style="margin:0">El estudio</h2><p>Hecho a mano, como se trabaja la madera</p><p>2026</p></div>
+    <div class="h-gut h-statement h-studio">
+      <figure class="h-relief" style="margin:0">
+        <canvas class="h-relief__cv" width="560" height="560" role="img" aria-label="Logotipo WG tallado en un tronco, iluminado por el cursor"></canvas>
+        <img class="h-relief__img" src="logo-wg.png" alt="" width="480" height="480">
+        <figcaption class="h-label" style="color:var(--h-soft)">Mueve el cursor sobre el logo: la luz revela el tallado</figcaption>
+      </figure>
+      <p>WoodGames Studio es un estudio de videojuegos nuevo. Hacemos juegos para móvil <em>fáciles de entender y difíciles de soltar</em>. El primero es Orbital.</p>
+    </div>
+  </section>
+
+  <!-- /03 Juegos: pósteres de tela -->
+  <section class="h-sec" id="juegos" aria-labelledby="h-juegos">
+    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/03</p><h2 id="h-juegos" class="h-label" style="margin:0">Juegos</h2><p>Arrastra los pósteres</p><p>02</p></div>
+    <div class="h-gut h-posters">
+      <article class="h-poster" aria-labelledby="h-p1">
+        <div class="h-poster__stage"><div class="h-poster__rod"></div><canvas data-cloth="orbital" aria-hidden="true"></canvas></div>
+        <h3 id="h-p1">Orbital</h3>
+        <div class="h-poster__meta h-label">
+          <span><b>Género</b>Arcade 2D</span><span><b>Plataformas</b>iOS · Android</span><span><b>Estado</b>En producción</span>
+          <a href="#orbital">Ver juego →</a>
+        </div>
+      </article>
+      <article class="h-poster" aria-labelledby="h-p2">
+        <div class="h-poster__stage"><div class="h-poster__rod"></div><canvas data-cloth="taller" aria-hidden="true"></canvas></div>
+        <h3 id="h-p2">Taller de antigüedades</h3>
+        <div class="h-poster__meta h-label">
+          <span><b>Género</b>Idle · restauración</span><span><b>Nombre</b>Provisional</span><span><b>Estado</b>Próximamente</span>
+          <a href="#devlog">Seguir en el devlog →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- /04 Orbital a pantalla completa -->
+  <section class="h-feature" id="orbital" aria-labelledby="h-orb">
+    <div class="orbital-bgn" data-orbital-bgn></div>
+    <div class="h-sec__bar h-gut h-label" style="border-top:0"><p class="h-dot" style="font-size:14px">/04</p><p>Orbital</p><p>Cómo se juega</p><p>En producción</p></div>
+    <div class="h-gut">
+      <h2 class="h-feature__word" id="h-orb">ORBITAL</h2>
+    </div>
+    <div class="h-gut" style="display:flex;flex-direction:column;gap:40px">
+      <p style="margin:0;max-width:44ch;font-size:17px;color:#d8d8e2">Un pequeño meteorito viaja de planeta en planeta usando la gravedad. Elige la órbita exterior, más segura, o la interior, más difícil y con más recompensa. Llega lo más lejos que puedas.</p>
+      <ol class="h-steps">
+        <li><strong>01</strong><b class="h-label">Atraer</b><span>Mantén pulsado: el planeta más cercano tira de ti.</span></li>
+        <li><strong>02</strong><b class="h-label">Orbitar</b><span>Exterior: 10 puntos y 1 moneda. Interior: 25 puntos y 3 monedas.</span></li>
+        <li><strong>03</strong><b class="h-label">Cargar</b><span>Mantén pulsado en órbita para cargar el lanzamiento.</span></li>
+        <li><strong>04</strong><b class="h-label">Soltar</b><span>Suelta en el momento justo hacia el siguiente planeta.</span></li>
+      </ol>
+      <div class="h-databar h-label" style="border-top:1px solid var(--h-line)">
+        <span><b>Género</b>Arcade 2D</span><span><b>Control</b>Un toque</span><span><b>Partida</b>Infinita</span><span><b>Monedas</b>Personalización</span>
+        <a href="#contacto">Avísame →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- /05 Índice claro -->
+  <section class="h-light h-sec" id="devlog" aria-labelledby="h-index">
+    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/05</p><h2 id="h-index" class="h-label" style="margin:0">Índice</h2><p>Todo lo que hay en la web</p><p>WoodGames</p></div>
+    <div class="h-gut h-light__intro"><p>WoodGames Studio es un estudio de videojuegos para móvil. Aquí encontrarás nuestros juegos, cómo los hacemos y todo lo que necesitas si escribes sobre nosotros.</p></div>
+    <div class="h-gut h-links">
+      <a class="h-link" href="#estudio"><strong>El estudio</strong><span>Quiénes somos y cómo trabajamos</span><i aria-hidden="true">→</i></a>
+      <a class="h-link" href="#juegos"><strong>Juegos</strong><span>Orbital y lo que viene después</span><i aria-hidden="true">→</i></a>
+      <a class="h-link" href="#devlog"><strong>Devlog</strong><span>Cómo se hace cada juego, paso a paso</span><i aria-hidden="true">→</i></a>
+      <a class="h-link" href="#contacto"><strong>Prensa</strong><span>Logos, capturas y descripción para descargar</span><i aria-hidden="true">→</i></a>
+    </div>
+    <div class="h-gut h-news">
+      <div>
+        <h2>Devlog</h2>
+        <ul>
+          <li><time datetime="2026-11-26">2026.11.26</time><a href="#devlog">Los fondos animados de Orbital: nebulosa y estrellas en parallax</a></li>
+          <li><time datetime="2026-11-22">2026.11.22</time><a href="#devlog">El bucle de juego de Orbital: atraer, orbitar, cargar y soltar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Avisos</h2>
+        <ul>
+          <li><time datetime="2026-11-27">2026.11.27</time><span>Orbital está en producción para iOS y Android.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="h-gut" id="contacto">
+      <div class="h-ask">
+        <p>Te avisamos <mark>el día que salga</mark> Orbital.<br>Un correo, nada más.</p>
+        <form class="h-form" novalidate>
+          <label class="h-sr" for="h-mail">Tu correo electrónico</label>
+          <input id="h-mail" name="mail" type="email" placeholder="tu@correo.com" autocomplete="email" required>
+          <button type="submit">Avisadme</button>
+          <output id="h-out" aria-live="polite"></output>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="h-foot">
+  <div class="h-gut h-foot__row h-label">
+    <p>Contacto<br><span style="color:var(--h-soft)">[correo@dominio]</span></p>
+    <p>[Ciudad]<br><span style="color:var(--h-soft)">España</span></p>
+    <p style="display:flex;flex-wrap:wrap;gap:4px 14px"><a href="#contacto">Instagram</a><a href="#contacto">TikTok</a><a href="#contacto">YouTube</a><a href="#contacto">Discord</a></p>
+    <p><a href="#inicio">Arriba ↑</a></p>
+  </div>
+  <p class="h-foot__word" aria-hidden="true">WOODGAMES</p>
+  <div class="h-gut h-foot__legal h-label"><span>© 2026 WoodGames Studio</span><span>Aviso legal · Privacidad · Cookies</span></div>
+</footer>
+
+<a class="h-float is-hidden" href="#contacto">Avísame de Orbital <span aria-hidden="true">→</span></a>
+
+<script src="orbital-bg.js" defer></script>
+<script src="orbital-bg-negro.js" defer></script>
+<script src="h.js" defer></script>
+</body>
+</html>

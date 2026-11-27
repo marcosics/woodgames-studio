@@ -14,8 +14,9 @@ Lienzo privado con todos los bocetos: https://claude.ai/artifact/PYTGWDTfNDVD8T6
 | E · Tipográfico | Inspirado en Wooo! y Dgrees: marca en movimiento, lista que alterna palo seco y serif, filas a dos columnas, principios con iconos pixel (La Bola, planeta, tronco) y el fondo negro de Orbital en una ventanita al pasar el cursor por "Orbital". Vista previa: https://claude.ai/artifact/S8jkFdLfhh3FKoUZiV2GaY | `e-tipografico/` | Boceto v0.1 |
 | F · Galería | Inspirado en Pixelarte: fondo negro, el fondo de nebulosa de Orbital como imagen grande con el nombre encima, mosaico de trabajos con filtros, fichas del estudio y pie ámbar con el nombre enorme. Vista previa: https://claude.ai/artifact/9hJ444Nn4igbieQ7K7p6th | `f-galeria/` | Boceto v0.1 |
 | G · Caso Orbital | Página de Orbital como caso de estudio (página de proyecto de Pixelarte): ficha, palabra gigante en contorno sobre cuadrícula, muestrario tipográfico, paleta del fondo del juego en franjas, barra de datos y bucle de juego. Vista previa: https://claude.ai/artifact/X8xXvjhKztVxQF62a13pNn | `g-caso-orbital/` | Boceto v0.1 |
+| **H · Completo** | El primer boceto completo. Referencias: Propagande (portada a pantalla completa con nombre gigante granulado, secciones numeradas), Fojcik (fuente de puntos Doto y pantalla de carga), Codrops Cloth Posters (pósteres de tela arrastrables), Codrops Relighting (logo tallado que se reilumina con el cursor) y Mount (índice claro, devlog con fechas, botón flotante). Vista previa: https://claude.ai/artifact/FFNnazEaioSgiAhaW61ZnD | `h-completo/` | Boceto v0.2 |
 
-E, F y G usan los fondos de Orbital (`orbital-bg*` de `d-orbital-fondos/LEEME.md`), que no están en este repositorio público.
+E, F, G y H usan los fondos de Orbital (`orbital-bg*` de `d-orbital-fondos/LEEME.md`), que no están en este repositorio público.
 
 `assets/`: logo recortado con fondo transparente (a partir del logo WG del cliente).
 

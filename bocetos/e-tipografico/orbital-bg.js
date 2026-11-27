@@ -1,0 +1,219 @@
+/* Orbital · fondo animado con parallax
+   Uso:  <div class="orbital-bg" data-orbital-bg></div>  +  orbital-bg.css  +  este archivo.
+   - Tres profundidades de estrellas y las nebulosas se desplazan a distinta velocidad.
+   - Sigue el cursor con suavidad (en móvil, deriva lenta automática).
+   - Respeta "reducir movimiento" y se detiene cuando no está en pantalla. */
+(function () {
+  'use strict';
+
+  var DEFAULTS = {
+    density: 1 / 14000,   // estrellas por px² (la imagen original es escasa)
+    shift: 46,            // desplazamiento máximo de la capa más cercana, en px a 1000 px de lado corto
+    follow: 0.045,        // suavidad del seguimiento del cursor (más bajo = más lento)
+    drift: 0.35,          // deriva automática cuando el cursor está quieto (0 a 1)
+    maxDpr: 2
+  };
+
+  // Tres profundidades: lejos se mueve poco, cerca se mueve más
+  var LAYERS = [
+    { depth: 0.18, share: 0.62, r: [0.35, 0.75], a: [0.25, 0.6] },
+    { depth: 0.45, share: 0.30, r: [0.6, 1.05], a: [0.4, 0.8] },
+    { depth: 1.00, share: 0.08, r: [0.9, 1.5], a: [0.6, 1.0] }
+  ];
+  var NEBULA_DEPTH = 0.08;
+
+  // Tonos de estrella de la imagen: blanco frío, lavanda y azul pálido
+  var TINTS = ['232,236,255', '232,236,255', '214,206,255', '200,218,255'];
+
+  function rand(seed) {
+    var s = seed >>> 0;
+    return function () {
+      s = (s + 0x6D2B79F5) >>> 0;
+      var t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function grainTile() {
+    var c = document.createElement('canvas');
+    c.width = c.height = 160;
+    var g = c.getContext('2d'), img = g.createImageData(160, 160), r = rand(7);
+    for (var i = 0; i < img.data.length; i += 4) {
+      var v = (r() * 255) | 0;
+      img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+      img.data[i + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    return c.toDataURL('image/png');
+  }
+
+  function OrbitalBg(root, opts) {
+    this.root = root;
+    this.o = Object.assign({}, DEFAULTS, opts || {});
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    this.target = { x: 0, y: 0 };
+    this.cur = { x: 0, y: 0 };
+    this.lastMove = -1e9;
+    this.visible = true;
+    this.build();
+    this.resize();
+    this.bind();
+    if (this.reduced) this.draw(0); else this.loop();
+  }
+
+  OrbitalBg.prototype.build = function () {
+    var root = this.root;
+    root.setAttribute('aria-hidden', 'true');
+    root.innerHTML =
+      '<div class="orbital-bg__nebula">' +
+        '<div class="orbital-bg__cloud orbital-bg__cloud--mid"></div>' +
+        '<div class="orbital-bg__cloud orbital-bg__cloud--violet"></div>' +
+        '<div class="orbital-bg__cloud orbital-bg__cloud--blue"></div>' +
+      '</div>' +
+      '<canvas class="orbital-bg__stars"></canvas>' +
+      '<div class="orbital-bg__grain"></div>' +
+      '<div class="orbital-bg__vignette"></div>';
+    this.nebula = root.querySelector('.orbital-bg__nebula');
+    this.violet = root.querySelector('.orbital-bg__cloud--violet');
+    this.blue = root.querySelector('.orbital-bg__cloud--blue');
+    this.canvas = root.querySelector('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    root.querySelector('.orbital-bg__grain').style.backgroundImage = 'url(' + grainTile() + ')';
+  };
+
+  OrbitalBg.prototype.resize = function () {
+    var w = this.root.clientWidth || window.innerWidth;
+    var h = this.root.clientHeight || window.innerHeight;
+    var dpr = Math.min(window.devicePixelRatio || 1, this.o.maxDpr);
+    this.w = w; this.h = h; this.dpr = dpr;
+    this.canvas.width = Math.round(w * dpr);
+    this.canvas.height = Math.round(h * dpr);
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.unit = Math.min(w, h) / 1000;
+    this.margin = this.o.shift * this.unit * 1.6 + 20;
+    this.makeStars();
+  };
+
+  OrbitalBg.prototype.makeStars = function () {
+    var r = rand(20261126), m = this.margin;
+    var W = this.w + m * 2, H = this.h + m * 2;
+    var total = Math.round(W * H * this.o.density);
+    this.stars = [];
+    for (var li = 0; li < LAYERS.length; li++) {
+      var L = LAYERS[li], n = Math.round(total * L.share);
+      for (var i = 0; i < n; i++) {
+        var big = li === 2 || r() < 0.04;
+        this.stars.push({
+          x: r() * W - m,
+          y: r() * H - m,
+          d: L.depth,
+          r: L.r[0] + r() * (L.r[1] - L.r[0]),
+          a: L.a[0] + r() * (L.a[1] - L.a[0]),
+          c: TINTS[(r() * TINTS.length) | 0],
+          // parpadeo lento: periodos de 3 a 9 s
+          sp: (Math.PI * 2) / (3 + r() * 6),
+          ph: r() * Math.PI * 2,
+          tw: 0.15 + r() * 0.35,
+          // las pequeñas cruces de luz que se ven en la imagen
+          cross: big && r() < 0.55
+        });
+      }
+    }
+  };
+
+  OrbitalBg.prototype.bind = function () {
+    var self = this;
+    var onResize = function () {
+      clearTimeout(self._rt);
+      self._rt = setTimeout(function () { self.resize(); if (self.reduced) self.draw(0); }, 120);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    if (!this.reduced && this.finePointer) {
+      window.addEventListener('pointermove', function (e) {
+        self.target.x = (e.clientX / window.innerWidth) * 2 - 1;
+        self.target.y = (e.clientY / window.innerHeight) * 2 - 1;
+        self.lastMove = performance.now();
+      }, { passive: true });
+      document.addEventListener('pointerleave', function () { self.lastMove = -1e9; });
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        self.visible = entries[0].isIntersecting;
+        if (self.visible && !self.reduced && !self.raf) self.loop();
+      }).observe(this.root);
+    }
+  };
+
+  OrbitalBg.prototype.loop = function () {
+    var self = this, prev = performance.now();
+    var tick = function (now) {
+      if (!self.visible) { self.raf = 0; return; }
+      var dt = Math.min(0.05, (now - prev) / 1000); prev = now;
+      self.update(now / 1000, dt);
+      self.draw(now / 1000);
+      self.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  };
+
+  OrbitalBg.prototype.update = function (t, dt) {
+    // Deriva lenta en forma de ocho; se desvanece mientras el cursor se mueve
+    var idle = Math.min(1, Math.max(0, (performance.now() - this.lastMove - 2500) / 3000));
+    var dr = this.o.drift * (this.finePointer ? idle : 1);
+    var gx = this.target.x * (1 - dr * 0.6) + Math.sin(t * 0.11) * dr;
+    var gy = this.target.y * (1 - dr * 0.6) + Math.sin(t * 0.22) * 0.6 * dr;
+    var k = 1 - Math.pow(1 - this.o.follow, dt * 60);
+    this.cur.x += (gx - this.cur.x) * k;
+    this.cur.y += (gy - this.cur.y) * k;
+  };
+
+  OrbitalBg.prototype.draw = function (t) {
+    var ctx = this.ctx, s = this.o.shift * this.unit;
+    var ox = -this.cur.x * s, oy = -this.cur.y * s * 0.7;
+
+    // Nebulosas: casi quietas, respiran muy despacio
+    var nb = 'translate3d(' + (ox * NEBULA_DEPTH * 3).toFixed(2) + 'px,' + (oy * NEBULA_DEPTH * 3).toFixed(2) + 'px,0)';
+    this.nebula.style.transform = nb;
+    if (!this.reduced) {
+      this.violet.style.transform = 'scale(' + (1 + 0.035 * Math.sin(t * 0.21)).toFixed(4) + ')';
+      this.violet.style.opacity = (0.92 + 0.08 * Math.sin(t * 0.17 + 1)).toFixed(3);
+      this.blue.style.transform = 'scale(' + (1 + 0.035 * Math.sin(t * 0.19 + 2)).toFixed(4) + ')';
+      this.blue.style.opacity = (0.92 + 0.08 * Math.sin(t * 0.15 + 3)).toFixed(3);
+    }
+
+    ctx.clearRect(0, 0, this.w, this.h);
+    for (var i = 0; i < this.stars.length; i++) {
+      var p = this.stars[i];
+      var x = p.x + ox * p.d, y = p.y + oy * p.d;
+      if (x < -6 || y < -6 || x > this.w + 6 || y > this.h + 6) continue;
+      var tw = this.reduced ? 1 : 1 - p.tw * (0.5 + 0.5 * Math.sin(t * p.sp + p.ph));
+      var a = p.a * tw;
+      ctx.fillStyle = 'rgba(' + p.c + ',' + a.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(x, y, p.r, 0, 6.2832);
+      ctx.fill();
+      if (p.cross) {
+        var L = p.r * (3.2 + 1.2 * tw);
+        ctx.strokeStyle = 'rgba(' + p.c + ',' + (a * 0.45).toFixed(3) + ')';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(x - L, y); ctx.lineTo(x + L, y);
+        ctx.moveTo(x, y - L); ctx.lineTo(x, y + L);
+        ctx.stroke();
+      }
+    }
+  };
+
+  window.OrbitalBg = OrbitalBg;
+
+  function auto() {
+    var els = document.querySelectorAll('[data-orbital-bg]');
+    for (var i = 0; i < els.length; i++) if (!els[i]._orbitalBg) els[i]._orbitalBg = new OrbitalBg(els[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', auto);
+  else auto();
+})();

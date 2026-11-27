@@ -108,6 +108,8 @@ Bocetos actuales en `bocetos/README.md`:
 - **E · Tipográfico, F · Galería y G · Caso Orbital:** a partir de las referencias de Dgrees, Pixelarte y Wooo! que envió el cliente. Falta un cuarto boceto con la última referencia que tiene que enviar.
 - **H · Completo:** después de que el cliente dijera que los bocetos anteriores estaban incompletos y eran malos, se hizo uno completo y probado. Lleva pósteres de tela, logo tallado con luz, los fondos de Orbital y un índice claro. Es la referencia de calidad para los siguientes: completo, probado y sin huecos de diseño.
 - **Feedback del boceto H:** la fuente granulada y la de puntos (Doto) "intentan molar pero no molan". Se cambiaron por Unbounded, sin efectos. El título se mueve solo. A los 5 s la portada reduce "Próximo lanzamiento · Orbital" a una tarjeta y presenta WoodGames Studio.
+- **Intro de madera** (del cliente, en `recursos/efectos-web/`, con su `INTEGRACION.md`): se integra **tal cual**, sin cambiar su aspecto, sus tiempos ni sus colores. En el boceto H está en modo prueba (`oncePerSession: false`). En producción va `true`. Las animaciones de la portada esperan a que termine (evento `intro-madera:fin`).
+- **Proceso y estado del trabajo:** `docs/proceso.md`.
 - **Criterio del cliente:** "limpio, minimalista y disruptivo" significa enseñar solo lo justo. No hay que inventar elementos raros. Inspírate en las referencias, pero no inventes.
 
 ## 8. Arte de los juegos (Orbital)

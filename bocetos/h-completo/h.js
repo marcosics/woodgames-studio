@@ -9,12 +9,6 @@
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   /* ---------- 1. Carga y grano ---------- */
-  var loader = document.querySelector('.h-loader');
-  var t0 = performance.now();
-  function doneLoading() { setTimeout(function () { loader && loader.classList.add('is-done'); }, Math.max(0, 1000 - (performance.now() - t0))); }
-  if (document.readyState === 'complete') doneLoading(); else addEventListener('load', doneLoading);
-  setTimeout(function () { loader && loader.classList.add('is-done'); }, 2600);
-
   (function grain() {
     var c = document.createElement('canvas'); c.width = c.height = 180;
     var g = c.getContext('2d'), im = g.createImageData(180, 180);
@@ -294,7 +288,19 @@
 
   /* ---------- Portada en dos tiempos ---------- */
   var heroEl = document.querySelector('.h-hero');
-  var studioTimer = setTimeout(function () { heroEl.classList.add('is-studio'); }, 6100); // 1,1 s de carga + 5 s de Orbital
+  // A los 5 s de ver Orbital (contando desde que termina la intro de madera) la portada pasa al estudio
+  var studioTimer = 0;
+  function scheduleStudio() { clearTimeout(studioTimer); heroEl.classList.remove('is-studio'); studioTimer = setTimeout(function () { heroEl.classList.add('is-studio'); }, 5300); }
+  if (document.documentElement.classList.contains('intro-madera-pending')) addEventListener('intro-madera:fin', scheduleStudio);
+  else scheduleStudio();
+  // Botón de prueba: repetir la intro
+  var replay = document.querySelector('[data-replay]');
+  if (replay) replay.addEventListener('click', function () {
+    if (!window.IntroMadera) return;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    heroEl.classList.remove('is-studio'); clearTimeout(studioTimer);
+    window.IntroMadera.play().then(scheduleStudio);
+  });
 
   /* ---------- 4. Botón flotante y formulario ---------- */
   var flt = document.querySelector('.h-float'), hero = document.querySelector('.h-hero'), ask = document.getElementById('contacto');

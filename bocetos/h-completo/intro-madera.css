@@ -1,0 +1,63 @@
+/* Intro de madera: un tablero de contrachapado tapa la web, se raja de abajo
+   arriba siguiendo la veta y las dos mitades caen dejando ver la página. */
+
+.intro-madera {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: auto;
+  cursor: pointer;
+  /* color de madera mientras se genera la textura (unos milisegundos) */
+  background: #c9a073;
+}
+
+.intro-madera.is-ready {
+  background: transparent;
+}
+
+.intro-madera__shade {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+}
+
+.intro-madera__rig {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.intro-madera__half,
+.intro-madera__fx {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.intro-madera__half {
+  will-change: transform;
+}
+
+.intro-madera__fx {
+  pointer-events: none;
+}
+
+html.intro-madera-lock,
+html.intro-madera-lock body {
+  overflow: hidden;
+}
+
+/* Tapa la web desde el primer pintado, antes de que cargue el JS
+   (lo activa el pequeño script del <head>; ver INTEGRACION.md) */
+html.intro-madera-pending::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #c9a073;
+}

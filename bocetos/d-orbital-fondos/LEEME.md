@@ -4,6 +4,6 @@
 - Juegos: fondo negro de Orbital dentro de una "ventana" que se abre a todo el ancho al hacer scroll.
 - Vista previa: https://claude.ai/artifact/UZQpxAMY1bvVwJVg1raEUU
 
-Para que funcione hacen falta los fondos del juego (del zip `orbital-fondos`), que no se suben a este repositorio público:
+Los fondos del juego ya están en esta carpeta (originales en `recursos/efectos-web/`):
 - `orbital-bg.css` y `orbital-bg.js` de `orbital-fondo/`, sin cambios.
 - `orbital-bg-negro.css` y `orbital-bg-negro.js` de `orbital-fondo-negro/`, renombrando `orbital-bg` por `orbital-bgn` y `OrbitalBg` por `OrbitalBgn` para que los dos fondos convivan en la misma página.

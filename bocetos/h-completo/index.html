@@ -4,12 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WoodGames · Boceto H</title>
+<script>
+  /* Intro de madera en MODO PRUEBA: se ve en cada carga (en producción: oncePerSession: true) */
+  window.IntroMaderaConfig = { oncePerSession: false };
+  (function () {
+    var c = window.IntroMaderaConfig || {}, seen = false;
+    try { seen = sessionStorage.getItem('intro-madera-vista') === '1'; } catch (e) {}
+    if (c.auto !== false && !(c.oncePerSession && seen)) document.documentElement.classList.add('intro-madera-pending');
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300..900&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="orbital-bg.css">
 <link rel="stylesheet" href="orbital-bg-negro.css">
 <link rel="stylesheet" href="h.css">
+<link rel="stylesheet" href="intro-madera.css">
 </head>
 <body>
 
@@ -20,7 +30,6 @@
   </filter>
 </svg>
 
-<div class="h-loader" aria-hidden="true"><div class="h-loader__box"><span>CARGANDO</span><div class="h-loader__bar"><i></i></div></div></div>
 <div class="h-grain" aria-hidden="true"></div>
 
 <header class="h-head h-gut h-label">
@@ -163,7 +172,7 @@
     <p><a href="#inicio">Arriba ↑</a></p>
   </div>
   <p class="h-foot__word" aria-hidden="true">WOODGAMES</p>
-  <div class="h-gut h-foot__legal h-label"><span>© 2026 WoodGames Studio</span><span>Aviso legal · Privacidad · Cookies</span></div>
+  <div class="h-gut h-foot__legal h-label"><span>© 2026 WoodGames Studio</span><span>Aviso legal · Privacidad · Cookies · <button type="button" class="h-replay" data-replay>Repetir intro (prueba)</button></span></div>
 </footer>
 
 <a class="h-float is-hidden" href="#contacto">Avísame de Orbital <span aria-hidden="true">→</span></a>
@@ -171,5 +180,6 @@
 <script src="orbital-bg.js" defer></script>
 <script src="orbital-bg-negro.js" defer></script>
 <script src="h.js" defer></script>
+<script src="intro-madera.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbital · Demo de efectos</title>
+
+  <!-- 1. Opciones de la intro (opcional) -->
+  <script>
+    window.IntroMaderaConfig = { oncePerSession: false };
+  </script>
+  <!-- 2. Tapa la web desde el primer pintado (evita que se vea un instante antes de la intro) -->
+  <script>
+    (function () {
+      var c = window.IntroMaderaConfig || {}, seen = false;
+      try { seen = sessionStorage.getItem('intro-madera-vista') === '1'; } catch (e) {}
+      if (c.auto !== false && !(c.oncePerSession && seen)) document.documentElement.classList.add('intro-madera-pending');
+    })();
+  </script>
+
+  <link rel="stylesheet" href="../efectos/fondo-orbital/orbital-bg.css">
+  <link rel="stylesheet" href="../efectos/intro-madera/intro-madera.css">
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #000; color: #e8e8f0; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <!-- Fondo de estrellas de Orbital: siempre detrás del contenido -->
+  <div class="orbital-bg" data-orbital-bg></div>
+
+  <!-- Aquí va el contenido de la portada -->
+
+  <script src="../efectos/fondo-orbital/orbital-bg.js" defer></script>
+  <script src="../efectos/intro-madera/intro-madera.js" defer></script>
+</body>
+</html>

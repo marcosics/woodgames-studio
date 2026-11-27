@@ -6,7 +6,7 @@
 <title>WoodGames · Boceto H</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Doto:wght@700;900&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300..900&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="orbital-bg.css">
 <link rel="stylesheet" href="orbital-bg-negro.css">
 <link rel="stylesheet" href="h.css">
@@ -34,32 +34,46 @@
   <!-- /01 Portada: el fondo del juego y el nombre del próximo lanzamiento -->
   <section class="h-hero" id="inicio" aria-labelledby="h-title">
     <div class="orbital-bg" data-orbital-bg></div>
-    <div class="h-hero__kick h-label"><span>Próximo lanzamiento · iOS y Android</span></div>
+    <div class="h-hero__orbital">
+      <div class="h-hero__kick h-label"><span>Próximo lanzamiento · iOS y Android</span><i class="h-hero__timer" aria-hidden="true"></i></div>
     <h1 class="h-hero__word" id="h-title" aria-label="Orbital"><span style="--i:0" aria-hidden="true">O</span><span style="--i:1" aria-hidden="true">R</span><span style="--i:2" aria-hidden="true">B</span><span style="--i:3" aria-hidden="true">I</span><span style="--i:4" aria-hidden="true">T</span><span style="--i:5" aria-hidden="true">A</span><span style="--i:6" aria-hidden="true">L</span></h1>
+    </div>
+    <div class="h-hero__studio h-gut" aria-live="polite">
+      <img src="logo-wg.png" alt="" width="120" height="120">
+      <p class="h-label">Estudio independiente de videojuegos</p>
+      <p class="h-hero__name">WoodGames Studio</p>
+      <p class="h-hero__line">Juegos para móvil fáciles de entender y difíciles de soltar.</p>
+      <div class="h-hero__actions"><a class="h-btn h-btn--solid" href="#juegos">Nuestros juegos</a><a class="h-btn" href="#estudio">El estudio</a></div>
+    </div>
+    <a class="h-hero__card" href="#orbital" aria-label="Próximo lanzamiento: Orbital. Ver el juego">
+      <span class="h-label">Próximo lanzamiento</span>
+      <strong>ORBITAL</strong>
+      <span class="h-label">iOS · Android · Ver juego →</span>
+    </a>
     <div class="h-hero__meta h-gut h-label">
       <p>(Desliza)</p>
       <p>Arcade 2D de gravedad.<br>Un solo dedo.</p>
       <p><a class="h-btn h-btn--solid" href="#contacto">Avísame del lanzamiento</a></p>
-      <p class="h-dot" style="font-size:14px">/01</p>
+      <p class="h-num">/01</p>
     </div>
   </section>
 
   <!-- /02 El estudio -->
   <section class="h-sec" id="estudio" aria-labelledby="h-estudio">
-    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/02</p><h2 id="h-estudio" class="h-label" style="margin:0">El estudio</h2><p>Hecho a mano, como se trabaja la madera</p><p>2026</p></div>
+    <div class="h-sec__bar h-gut h-label"><p class="h-num">/02</p><h2 id="h-estudio" class="h-label" style="margin:0">El estudio</h2><p>Hecho a mano, como se trabaja la madera</p><p>2026</p></div>
     <div class="h-gut h-statement h-studio">
       <figure class="h-relief" style="margin:0">
         <canvas class="h-relief__cv" width="560" height="560" role="img" aria-label="Logotipo WG tallado en un tronco, iluminado por el cursor"></canvas>
         <img class="h-relief__img" src="logo-wg.png" alt="" width="480" height="480">
         <figcaption class="h-label" style="color:var(--h-soft)">Mueve el cursor sobre el logo: la luz revela el tallado</figcaption>
       </figure>
-      <p>WoodGames Studio es un estudio de videojuegos nuevo. Hacemos juegos para móvil <em>fáciles de entender y difíciles de soltar</em>. El primero es Orbital.</p>
+      <p>Somos un estudio nuevo y pequeño. Tallamos cada juego <em>a mano</em>, pieza a pieza, hasta que se siente bien en la mano. El primero es Orbital.</p>
     </div>
   </section>
 
   <!-- /03 Juegos: pósteres de tela -->
   <section class="h-sec" id="juegos" aria-labelledby="h-juegos">
-    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/03</p><h2 id="h-juegos" class="h-label" style="margin:0">Juegos</h2><p>Arrastra los pósteres</p><p>02</p></div>
+    <div class="h-sec__bar h-gut h-label"><p class="h-num">/03</p><h2 id="h-juegos" class="h-label" style="margin:0">Juegos</h2><p>Arrastra los pósteres</p><p>02</p></div>
     <div class="h-gut h-posters">
       <article class="h-poster" aria-labelledby="h-p1">
         <div class="h-poster__stage"><div class="h-poster__rod"></div><canvas data-cloth="orbital" aria-hidden="true"></canvas></div>
@@ -83,7 +97,7 @@
   <!-- /04 Orbital a pantalla completa -->
   <section class="h-feature" id="orbital" aria-labelledby="h-orb">
     <div class="orbital-bgn" data-orbital-bgn></div>
-    <div class="h-sec__bar h-gut h-label" style="border-top:0"><p class="h-dot" style="font-size:14px">/04</p><p>Orbital</p><p>Cómo se juega</p><p>En producción</p></div>
+    <div class="h-sec__bar h-gut h-label" style="border-top:0"><p class="h-num">/04</p><p>Orbital</p><p>Cómo se juega</p><p>En producción</p></div>
     <div class="h-gut">
       <h2 class="h-feature__word" id="h-orb">ORBITAL</h2>
     </div>
@@ -104,7 +118,7 @@
 
   <!-- /05 Índice claro -->
   <section class="h-light h-sec" id="devlog" aria-labelledby="h-index">
-    <div class="h-sec__bar h-gut h-label"><p class="h-dot" style="font-size:14px">/05</p><h2 id="h-index" class="h-label" style="margin:0">Índice</h2><p>Todo lo que hay en la web</p><p>WoodGames</p></div>
+    <div class="h-sec__bar h-gut h-label"><p class="h-num">/05</p><h2 id="h-index" class="h-label" style="margin:0">Índice</h2><p>Todo lo que hay en la web</p><p>WoodGames</p></div>
     <div class="h-gut h-light__intro"><p>WoodGames Studio es un estudio de videojuegos para móvil. Aquí encontrarás nuestros juegos, cómo los hacemos y todo lo que necesitas si escribes sobre nosotros.</p></div>
     <div class="h-gut h-links">
       <a class="h-link" href="#estudio"><strong>El estudio</strong><span>Quiénes somos y cómo trabajamos</span><i aria-hidden="true">→</i></a>

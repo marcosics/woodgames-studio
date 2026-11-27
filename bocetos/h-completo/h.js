@@ -57,7 +57,8 @@
   }
 
   /* ---------- 2. Pósteres de tela ---------- */
-  var TW = 1000, TH = 1280; // textura del póster (proporción 1 : 1.28)
+  var TW = 1000, TH = 1280;
+  var DISPLAY = 'Unbounded, "Arial Black", sans-serif'; // textura del póster (proporción 1 : 1.28)
 
   function paintOrbital(g) {
     g.fillStyle = '#020207'; g.fillRect(0, 0, TW, TH);
@@ -84,10 +85,8 @@
     g.fillStyle = '#f2f2ee';
     g.font = '600 26px Inter, sans-serif'; g.textBaseline = 'top';
     g.fillText('WOODGAMES STUDIO', 56, 64); g.textAlign = 'right'; g.fillText('PRÓXIMO LANZAMIENTO', TW - 56, 64); g.textAlign = 'left';
-    g.font = '800 200px Archivo, "Arial Black", sans-serif';
-    try { g.font = '800 125% 200px Archivo, "Arial Black", sans-serif'; } catch (e) {}
     g.textBaseline = 'alphabetic';
-    fitText(g, 'ORBITAL', 56, TH - 120, TW - 112, '800', 'Archivo, "Arial Black", sans-serif');
+    fitText(g, 'ORBITAL', 56, TH - 120, TW - 112, '600', DISPLAY);
     g.font = '600 26px Inter, sans-serif'; g.fillStyle = '#a3a3ad';
     g.fillText('iOS · ANDROID', 56, TH - 64); g.textAlign = 'right'; g.fillText('ARCADE 2D', TW - 56, TH - 64); g.textAlign = 'left';
   }
@@ -103,8 +102,8 @@
     g.fillStyle = '#f2e6d2'; g.font = '600 26px Inter, sans-serif'; g.textBaseline = 'top';
     g.fillText('WOODGAMES STUDIO', 56, 64); g.textAlign = 'right'; g.fillText('PRÓXIMAMENTE', TW - 56, 64); g.textAlign = 'left';
     g.textBaseline = 'alphabetic';
-    fitText(g, 'TALLER DE', 56, TH - 250, TW - 112, '800', 'Archivo, "Arial Black", sans-serif');
-    fitText(g, 'ANTIGÜEDADES', 56, TH - 120, TW - 112, '800', 'Archivo, "Arial Black", sans-serif');
+    fitText(g, 'TALLER DE', 56, TH - 250, TW - 112, '600', DISPLAY);
+    fitText(g, 'ANTIGÜEDADES', 56, TH - 120, TW - 112, '600', DISPLAY);
     g.font = '600 26px Inter, sans-serif'; g.fillStyle = '#c9b49a';
     g.fillText('IDLE · RESTAURACIÓN', 56, TH - 64); g.textAlign = 'right'; g.fillText('NOMBRE PROVISIONAL', TW - 56, TH - 64); g.textAlign = 'left';
   }
@@ -290,8 +289,12 @@
   }
   // Los pósteres dibujan texto: esperamos a las fuentes
   if (document.fonts && document.fonts.ready) {
-    Promise.all([document.fonts.load('800 100px Archivo'), document.fonts.load('600 20px Inter')]).then(start, start);
+    Promise.all([document.fonts.load('600 100px Unbounded'), document.fonts.load('600 20px Inter')]).then(start, start);
   } else start();
+
+  /* ---------- Portada en dos tiempos ---------- */
+  var heroEl = document.querySelector('.h-hero');
+  var studioTimer = setTimeout(function () { heroEl.classList.add('is-studio'); }, 6100); // 1,1 s de carga + 5 s de Orbital
 
   /* ---------- 4. Botón flotante y formulario ---------- */
   var flt = document.querySelector('.h-float'), hero = document.querySelector('.h-hero'), ask = document.getElementById('contacto');

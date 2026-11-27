@@ -1,0 +1,125 @@
+/* Boceto D · WoodGames
+   Dos usos del fondo de Orbital:
+   1) Portada: el fondo de nebulosa ocupa toda la primera pantalla. Solo el nombre del juego y lo necesario.
+   2) Juegos: el fondo negro con estrellas vive dentro de una "ventana" que se abre al hacer scroll. */
+
+:root {
+  --d-black: #000000;
+  --d-ink: #04040a;
+  --d-text: #f1f2fb;
+  --d-soft: #c3c6de;
+  --d-muted: #8a8fb3;
+  --d-line: rgba(241, 242, 251, 0.14);
+  --d-amber: #f2a93b;
+  --d-amber-ink: #160d02;
+  --d-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --d-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --d-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+
+body { background: var(--d-black); color: var(--d-text); font-family: var(--d-body); }
+
+.d-wrap {
+  width: 100%; max-width: 1320px; margin: 0 auto; box-sizing: border-box;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+
+.d-label { font: 400 12px/1.4 var(--d-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--d-muted); }
+
+/* ---------- PORTADA ---------- */
+.d-hero { position: relative; isolation: isolate; overflow: hidden; min-height: max(620px, 100svh); display: flex; }
+/* El fondo del juego, contenido en la portada (en el original va fijo a toda la página) */
+.d-hero .orbital-bg { position: absolute; z-index: 0; }
+
+.d-hero .d-wrap { position: relative; z-index: 1; display: flex; flex-direction: column; padding-block: 24px 28px; }
+
+.d-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; }
+.d-brand { display: inline-flex; align-items: center; gap: 12px; color: var(--d-text); text-decoration: none; }
+.d-brand img { width: 32px; height: 32px; }
+.d-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.d-nav a { color: var(--d-soft); text-decoration: none; padding-block: 6px; }
+.d-nav a:hover { color: var(--d-text); }
+
+.d-hero__center { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 20px; padding-block: 48px; }
+.d-title {
+  margin: 0; font: 300 clamp(56px, 13vw, 200px)/.9 var(--d-display); letter-spacing: .06em;
+  padding-left: .06em; /* compensa el espaciado para que quede centrado */
+}
+.d-hero__line { margin: 0; max-width: 34ch; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; color: var(--d-soft); text-wrap: balance; }
+
+.d-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 12px; }
+.d-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; font: 600 15px/1 var(--d-body); text-decoration: none; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.d-btn--primary { background: var(--d-text); color: var(--d-black); }
+.d-btn--primary:hover { background: var(--d-amber); color: var(--d-amber-ink); }
+.d-btn--ghost { color: var(--d-text); border: 1px solid var(--d-line); }
+.d-btn--ghost:hover { border-color: rgba(241,242,251,.5); }
+
+.d-hero__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 18px; border-top: 1px solid var(--d-line); }
+.d-hero__bottom b { font-weight: 400; color: var(--d-text); }
+
+/* Entrada suave: el contenido aparece después del fondo */
+@keyframes d-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.d-title { animation: d-in 1.2s cubic-bezier(.2,.7,.15,1) both .2s; }
+.d-hero__line { animation: d-in 1s ease both .6s; }
+.d-ctas { animation: d-in 1s ease both .8s; }
+.d-top, .d-hero__bottom { animation: d-in 1s ease both 1s; }
+
+/* ---------- JUEGOS ---------- */
+.d-games { background: var(--d-black); padding-block: 120px 96px; }
+.d-games__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; padding-bottom: 40px; }
+.d-games__head h2 { margin: 0; font: 300 clamp(40px, 6vw, 88px)/1 var(--d-display); letter-spacing: .02em; }
+
+/* La ventana: el fondo negro de Orbital como protagonista, recortado y abriéndose con el scroll */
+.d-window {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(88svh, 860px);
+  display: flex;
+  clip-path: inset(var(--d-clip-y, 0%) var(--d-clip-x, 0%) round var(--d-clip-r, 0px));
+  will-change: clip-path;
+}
+.d-window .orbital-bgn { position: absolute; z-index: 0; }
+
+.d-window__inner {
+  position: relative; z-index: 1; flex: 1 1 auto;
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px;
+  padding-block: 40px;
+}
+.d-window__text { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-width: 0; }
+.d-window__name { margin: 0; font: 300 clamp(52px, 9vw, 150px)/.9 var(--d-display); letter-spacing: .04em; }
+.d-window__desc { margin: 0; max-width: 40ch; color: var(--d-soft); font-size: 17px; line-height: 1.6; }
+.d-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, auto)); justify-content: start; gap: 8px 40px; border-top: 1px solid var(--d-line); padding-top: 18px; }
+.d-facts div { display: flex; flex-direction: column; gap: 4px; }
+.d-facts dt { font: 400 11px/1.4 var(--d-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--d-muted); }
+.d-facts dd { margin: 0; font-size: 15px; }
+
+.d-shot {
+  align-self: center; justify-self: end;
+  width: min(300px, 100%); aspect-ratio: 9 / 19.5; max-width: 100%;
+  border: 1px dashed rgba(241,242,251,.28); border-radius: 36px;
+  display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; box-sizing: border-box;
+  background: rgba(0,0,0,.35);
+}
+
+.d-list { list-style: none; margin: 56px 0 0; padding: 0; border-top: 1px solid var(--d-line); }
+.d-list li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: baseline; gap: 16px; padding: 28px 0; border-bottom: 1px solid var(--d-line); }
+.d-list strong { font: 300 clamp(24px, 3vw, 40px)/1.1 var(--d-display); }
+
+.d-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-block: 28px; border-top: 1px solid var(--d-line); }
+
+.d-btn:focus-visible, .d-nav a:focus-visible, .d-brand:focus-visible { outline: 2px solid var(--d-amber); outline-offset: 4px; }
+
+@media (max-width: 820px) {
+  .d-window__inner { grid-template-columns: 1fr; }
+  .d-shot { justify-self: start; width: min(220px, 70%); }
+  .d-facts { grid-template-columns: repeat(2, minmax(0, auto)); }
+  .d-nav { display: none; }
+  .d-list li { grid-template-columns: 40px minmax(0, 1fr); }
+  .d-list li > .d-label:last-child { grid-column: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d-title, .d-hero__line, .d-ctas, .d-top, .d-hero__bottom { animation: none; }
+  .d-window { clip-path: none; }
+}

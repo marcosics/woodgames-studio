@@ -104,6 +104,8 @@ Bocetos actuales en `bocetos/README.md`:
 - **A · Amigable:** estilo cartoon, madera cálida y sombras duras.
 - **B · Minimalista:** editorial, con la idea "Anillos", tipografía grande y animaciones sutiles.
 - **C · Portada Orbital:** el fondo del juego (nebulosas violeta y azul, estrellas) en parallax como portada de toda la web para promocionar Orbital. Planetas, La Bola en ámbar (único color cálido) y el cursor como lente de gravedad. Código web real en `bocetos/c-portada-orbital/`.
+- **D · Fondos de Orbital:** los dos fondos del juego sin añadir nada inventado. Nebulosa en la portada y fondo negro en Juegos, dentro de una ventana que se abre con el scroll. En `bocetos/d-orbital-fondos/`.
+- **Criterio del cliente:** "limpio, minimalista y disruptivo" significa enseñar solo lo justo. No hay que inventar elementos raros. Inspírate en las referencias, pero no inventes.
 
 ## 8. Arte de los juegos (Orbital)
 

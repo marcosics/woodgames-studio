@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WoodGames · Boceto D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="orbital-bg.css">
+<link rel="stylesheet" href="orbital-bg-negro.css">
+<link rel="stylesheet" href="boceto-d.css">
+</head>
+<body>
+
+<section class="d-hero" id="inicio" aria-labelledby="d-title">
+  <div class="orbital-bg" data-orbital-bg></div>
+  <div class="d-wrap">
+    <header class="d-top">
+      <a class="d-brand d-label" href="#inicio"><img src="logo-wg.png" alt="" width="32" height="32">WoodGames Studio</a>
+      <nav class="d-nav d-label" aria-label="Principal">
+        <a href="#juegos">Juegos</a>
+        <a href="#juegos">Estudio</a>
+        <a href="#juegos">Contacto</a>
+      </nav>
+    </header>
+
+    <div class="d-hero__center">
+      <p class="d-label">Próximo lanzamiento</p>
+      <h1 class="d-title" id="d-title">ORBITAL</h1>
+      <p class="d-hero__line">Domina la gravedad. Salta de planeta en planeta con un solo dedo.</p>
+      <div class="d-ctas">
+        <a class="d-btn d-btn--primary" href="#juegos">Avísame del lanzamiento</a>
+        <a class="d-btn d-btn--ghost" href="#juegos">Ver el juego</a>
+      </div>
+    </div>
+
+    <div class="d-hero__bottom d-label">
+      <span>Plataformas <b>iOS · Android</b></span>
+      <span>Estado <b>En producción</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="d-games" id="juegos" aria-labelledby="d-games-title">
+  <div class="d-wrap d-games__head">
+    <h2 id="d-games-title">Juegos</h2>
+    <span class="d-label">02 títulos</span>
+  </div>
+
+  <article class="d-window" data-d-window aria-labelledby="d-orbital">
+    <div class="orbital-bgn" data-orbital-bgn></div>
+    <div class="d-wrap d-window__inner">
+      <div class="d-window__text">
+        <span class="d-label">01 · En producción</span>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <h3 class="d-window__name" id="d-orbital">Orbital</h3>
+          <p class="d-window__desc">Un pequeño meteorito viaja de planeta en planeta usando la gravedad. Elige la órbita exterior, más segura, o la interior, más difícil y con más recompensa.</p>
+        </div>
+        <dl class="d-facts">
+          <div><dt>Género</dt><dd>Arcade 2D de habilidad</dd></div>
+          <div><dt>Plataformas</dt><dd>iOS · Android</dd></div>
+          <div><dt>Control</dt><dd>Un toque</dd></div>
+        </dl>
+      </div>
+      <div class="d-shot d-label">Captura del juego</div>
+    </div>
+  </article>
+
+  <div class="d-wrap">
+    <ol class="d-list">
+      <li><span class="d-label">02</span><strong>Taller de antigüedades</strong><span class="d-label">Próximamente</span></li>
+    </ol>
+  </div>
+</section>
+
+<footer class="d-wrap d-foot d-label">
+  <span>© 2026 WoodGames Studio</span>
+  <span>Boceto D</span>
+</footer>
+
+<script src="orbital-bg.js" defer></script>
+<script src="orbital-bg-negro.js" defer></script>
+<script src="boceto-d.js" defer></script>
+</body>
+</html>
